@@ -7,215 +7,113 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cellipse cx='32' cy='42' rx='13' ry='10' fill='%23D9713C'/%3E%3Ccircle cx='15' cy='27' r='6.5' fill='%23D9713C'/%3E%3Ccircle cx='27' cy='18' r='6.5' fill='%23D9713C'/%3E%3Ccircle cx='40' cy='18' r='6.5' fill='%23D9713C'/%3E%3Ccircle cx='50' cy='27' r='6.5' fill='%23D9713C'/%3E%3C/svg%3E">
 <style>
 :root{
-  --cream:#FAF5EC;
-  --cream-deep:#F3EADA;
-  --cocoa:#3D2B1F;
-  --cocoa-soft:#6B5645;
-  --caramel:#D9713C;
-  --caramel-deep:#B95A28;
-  --caramel-soft:#F6DEC8;
-  --sage:#7C9473;
-  --card:#FFFFFF;
-  --line:#E8DCC8;
+  --cream:#FAF5EC; --cream-deep:#F3EADA; --cocoa:#3D2B1F; --cocoa-soft:#6B5645;
+  --caramel:#D9713C; --caramel-deep:#B95A28; --caramel-soft:#F6DEC8;
+  --sage:#7C9473; --card:#FFFFFF; --line:#E8DCC8;
   --shadow:0 10px 30px rgba(93,63,32,.10);
   --serif:Georgia,"Times New Roman","Songti SC","STSong","SimSun",serif;
   --sans:-apple-system,"PingFang SC","HarmonyOS Sans SC","Microsoft YaHei",system-ui,sans-serif;
 }
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{height:100%}
-body{
-  font-family:var(--sans);
-  background:var(--cream);
-  color:var(--cocoa);
-  overflow:hidden;
-}
-/* 爪印背景纹理 */
-body::before{
-  content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240' viewBox='0 0 240 240'%3E%3Cg fill='%23D9713C' fill-opacity='0.05'%3E%3Cellipse cx='60' cy='150' rx='18' ry='14'/%3E%3Ccircle cx='38' cy='126' r='8'/%3E%3Ccircle cx='56' cy='116' r='8'/%3E%3Ccircle cx='76' cy='120' r='8'/%3E%3Ccircle cx='90' cy='134' r='8'/%3E%3Cg transform='rotate(24 170 60)'%3E%3Cellipse cx='170' cy='70' rx='18' ry='14'/%3E%3Ccircle cx='148' cy='46' r='8'/%3E%3Ccircle cx='166' cy='36' r='8'/%3E%3Ccircle cx='186' cy='40' r='8'/%3E%3Ccircle cx='200' cy='54' r='8'/%3E%3C/g%3E%3Cg transform='rotate(-18 40 40)'%3E%3Cellipse cx='40' cy='46' rx='13' ry='10'/%3E%3Ccircle cx='24' cy='30' r='6'/%3E%3Ccircle cx='37' cy='23' r='6'/%3E%3Ccircle cx='51' cy='27' r='6'/%3E%3Ccircle cx='61' cy='37' r='6'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-}
+body{font-family:var(--sans);background:var(--cream);color:var(--cocoa);overflow:hidden}
+body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240' viewBox='0 0 240 240'%3E%3Cg fill='%23D9713C' fill-opacity='0.05'%3E%3Cellipse cx='60' cy='150' rx='18' ry='14'/%3E%3Ccircle cx='38' cy='126' r='8'/%3E%3Ccircle cx='56' cy='116' r='8'/%3E%3Ccircle cx='76' cy='120' r='8'/%3E%3Ccircle cx='90' cy='134' r='8'/%3E%3Cg transform='rotate(24 170 60)'%3E%3Cellipse cx='170' cy='70' rx='18' ry='14'/%3E%3Ccircle cx='148' cy='46' r='8'/%3E%3Ccircle cx='166' cy='36' r='8'/%3E%3Ccircle cx='186' cy='40' r='8'/%3E%3Ccircle cx='200' cy='54' r='8'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");}
 .app{position:relative;z-index:1;height:100%;max-width:680px;margin:0 auto;display:flex;flex-direction:column}
 
-/* 顶栏 */
-.topbar{
-  flex:none;display:flex;align-items:center;gap:12px;
-  padding:14px 20px 12px;background:rgba(250,245,236,.92);
-  border-bottom:1px solid var(--line);backdrop-filter:blur(8px);
-}
-.brand{display:flex;align-items:center;gap:9px;font-family:var(--serif);font-weight:700;font-size:16px;letter-spacing:.5px}
-.brand .paw{width:26px;height:26px;flex:none}
-.top-progress{flex:1;min-width:0}
-.top-progress .bar{height:6px;border-radius:99px;background:var(--cream-deep);overflow:hidden}
-.top-progress .bar i{display:block;height:100%;width:0%;border-radius:99px;background:linear-gradient(90deg,var(--caramel),#E89A5F);transition:width .45s cubic-bezier(.22,1,.36,1)}
-.top-progress .num{margin-top:5px;font-size:11px;color:var(--cocoa-soft);text-align:right;letter-spacing:.3px}
+.topbar{flex:none;padding:12px 18px 10px;background:rgba(250,245,236,.94);border-bottom:1px solid var(--line);backdrop-filter:blur(8px)}
+.top-row{display:flex;align-items:center;gap:10px}
+.brand{display:flex;align-items:center;gap:8px;font-family:var(--serif);font-weight:700;font-size:16px}
+.brand .paw{width:24px;height:24px}
+.live{margin-left:auto;display:flex;align-items:center;gap:6px;font-size:11.5px;color:var(--cocoa-soft)}
+.live i{width:7px;height:7px;border-radius:50%;background:var(--sage);animation:pulse 1.6s infinite}
+@keyframes pulse{0%,100%{opacity:.4}50%{opacity:1}}
+.phases{display:flex;gap:4px;margin-top:9px}
+.ph{flex:1;text-align:center;font-size:10.5px;color:var(--cocoa-soft);padding:4px 0;border-radius:8px;background:var(--cream-deep);letter-spacing:.5px;transition:all .3s;white-space:nowrap;overflow:hidden}
+.ph.on{background:var(--caramel);color:#fff;font-weight:600}
+.ph.done{background:var(--caramel-soft);color:var(--caramel-deep)}
 
-/* 对话区 */
-.chat{flex:1;overflow-y:auto;padding:20px 16px 14px;scroll-behavior:smooth}
-.chat-inner{display:flex;flex-direction:column;gap:14px;max-width:560px;margin:0 auto}
-.row{display:flex;gap:10px;align-items:flex-end;animation:rise .38s cubic-bezier(.22,1,.36,1) both}
+.chat{flex:1;overflow-y:auto;padding:18px 14px 10px}
+.chat-inner{display:flex;flex-direction:column;gap:13px;max-width:560px;margin:0 auto}
+.row{display:flex;gap:10px;align-items:flex-end;animation:rise .35s cubic-bezier(.22,1,.36,1) both}
 .row.me{flex-direction:row-reverse}
-@keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
-.avatar{
-  flex:none;width:36px;height:36px;border-radius:50%;
-  background:var(--caramel-soft);border:2px solid #fff;
-  display:flex;align-items:center;justify-content:center;
-  box-shadow:0 2px 8px rgba(93,63,32,.12);overflow:hidden;
-}
-.avatar img{width:70%;height:70%}
-.bubble{
-  max-width:78%;padding:12px 16px;border-radius:18px;font-size:15px;line-height:1.75;
-  background:var(--card);border:1px solid var(--line);box-shadow:0 4px 14px rgba(93,63,32,.07);
-  word-break:break-word;
-}
-.row.me .bubble{
-  background:linear-gradient(135deg,var(--caramel),#E08A50);color:#FFF9F2;
-  border:none;border-bottom-right-radius:6px;box-shadow:0 6px 16px rgba(217,113,60,.28);
-}
+@keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.avatar{flex:none;width:34px;height:34px;border-radius:50%;background:var(--caramel-soft);border:2px solid #fff;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(93,63,32,.12);overflow:hidden}
+.avatar svg{width:66%;height:66%}
+.bubble{max-width:80%;padding:11px 15px;border-radius:17px;font-size:15px;line-height:1.75;background:var(--card);border:1px solid var(--line);box-shadow:0 4px 14px rgba(93,63,32,.07);word-break:break-word;white-space:pre-wrap}
+.row.me .bubble{background:linear-gradient(135deg,var(--caramel),#E08A50);color:#FFF9F2;border:none;border-bottom-right-radius:6px;box-shadow:0 6px 16px rgba(217,113,60,.28)}
 .row.bot .bubble{border-bottom-left-radius:6px}
-.bubble .tag{display:inline-block;font-size:11px;letter-spacing:1.5px;color:var(--caramel-deep);margin-bottom:4px;font-weight:600}
-.bubble strong{color:var(--caramel-deep)}
-.row.me .bubble strong{color:#FFE8CF}
-.dots{display:inline-flex;gap:5px;padding:4px 2px}
-.dots i{width:7px;height:7px;border-radius:50%;background:var(--cocoa-soft);opacity:.4;animation:blink 1.2s infinite}
-.dots i:nth-child(2){animation-delay:.2s}
-.dots i:nth-child(3){animation-delay:.4s}
-@keyframes blink{0%,100%{opacity:.35;transform:translateY(0)}50%{opacity:.9;transform:translateY(-3px)}}
+.bubble .tag{display:block;font-size:10.5px;letter-spacing:1.5px;color:var(--caramel-deep);margin-bottom:3px;font-weight:600}
+.cursor{display:inline-block;width:2px;height:15px;background:var(--caramel-deep);vertical-align:-2px;animation:blink .8s infinite;margin-left:1px}
+@keyframes blink{50%{opacity:0}}
+.dots{display:inline-flex;gap:5px;padding:3px 2px}
+.dots i{width:7px;height:7px;border-radius:50%;background:var(--cocoa-soft);opacity:.4;animation:bob 1.2s infinite}
+.dots i:nth-child(2){animation-delay:.2s}.dots i:nth-child(3){animation-delay:.4s}
+@keyframes bob{0%,100%{opacity:.35;transform:translateY(0)}50%{opacity:.9;transform:translateY(-3px)}}
 
-/* 概念卡 */
-.concept-card{
-  max-width:86%;background:var(--card);border:1.5px solid var(--caramel);
-  border-radius:18px;border-bottom-left-radius:6px;overflow:hidden;
-  box-shadow:0 12px 32px rgba(217,113,60,.16);
-}
-.concept-card .cc-head{
-  background:linear-gradient(135deg,var(--caramel),#E08A50);color:#FFF7EE;
-  padding:14px 18px;position:relative;
-}
-.concept-card .cc-head::after{
-  content:"";position:absolute;right:14px;top:10px;width:34px;height:34px;opacity:.35;
-  background:radial-gradient(circle at 30% 30%,#fff 2px,transparent 3px),radial-gradient(circle at 60% 25%,#fff 2px,transparent 3px),radial-gradient(circle at 45% 55%,#fff 4px,transparent 5px);
-}
-.concept-card .cc-kicker{font-size:11px;letter-spacing:3px;opacity:.9}
-.concept-card .cc-title{font-family:var(--serif);font-size:20px;font-weight:700;margin-top:4px;letter-spacing:.5px}
-.concept-card .cc-sub{font-size:12.5px;margin-top:5px;opacity:.92}
-.concept-card img.cc-img{display:block;width:100%;max-height:190px;object-fit:cover}
-.concept-card .cc-body{padding:14px 18px 16px}
-.concept-card .cc-desc{font-size:14px;line-height:1.8;color:var(--cocoa)}
-.concept-card ul{list-style:none;margin-top:10px;display:flex;flex-direction:column;gap:8px}
-.concept-card li{display:flex;gap:9px;font-size:13.5px;line-height:1.6;color:var(--cocoa-soft)}
-.concept-card li .ic{flex:none;margin-top:2px;width:15px;height:15px}
-.concept-card li b{color:var(--cocoa);font-weight:600}
+.concept-card{max-width:88%;background:var(--card);border:1.5px solid var(--caramel);border-radius:17px;border-bottom-left-radius:6px;overflow:hidden;box-shadow:0 12px 32px rgba(217,113,60,.16)}
+.cc-head{background:linear-gradient(135deg,var(--caramel),#E08A50);color:#FFF7EE;padding:13px 17px;position:relative}
+.cc-kicker{font-size:10.5px;letter-spacing:3px;opacity:.9}
+.cc-title{font-family:var(--serif);font-size:19px;font-weight:700;margin-top:3px}
+.cc-sub{font-size:12.5px;margin-top:4px;opacity:.92}
+.cc-img{display:block;width:100%;max-height:180px;object-fit:cover}
+.cc-body{padding:13px 17px 15px}
+.cc-desc{font-size:13.5px;line-height:1.8;color:var(--cocoa)}
+.cc-body ul{list-style:none;margin-top:9px;display:flex;flex-direction:column;gap:7px}
+.cc-body li{display:flex;gap:8px;font-size:13px;line-height:1.6;color:var(--cocoa-soft)}
+.cc-body li .ic{flex:none;margin-top:2px;width:14px;height:14px}
+.cc-body li b{color:var(--cocoa);font-weight:600}
 
-/* 输入区 */
 .composer{flex:none;border-top:1px solid var(--line);background:rgba(250,245,236,.96);backdrop-filter:blur(8px)}
-.composer-inner{max-width:560px;margin:0 auto;padding:14px 16px calc(16px + env(safe-area-inset-bottom))}
-.hint{font-size:12px;color:var(--cocoa-soft);margin-bottom:9px;letter-spacing:.3px;display:none}
-.opts{display:flex;flex-wrap:wrap;gap:9px}
-.opt{
-  appearance:none;border:1.5px solid var(--line);background:var(--card);color:var(--cocoa);
-  font-family:var(--sans);font-size:14px;padding:11px 16px;border-radius:14px;cursor:pointer;
-  min-height:44px;line-height:1.4;transition:all .18s ease;text-align:left;
-}
-.opt:hover{border-color:var(--caramel);transform:translateY(-1px);box-shadow:0 6px 14px rgba(217,113,60,.14)}
-.opt:active{transform:scale(.97)}
-.opt.sel{background:var(--caramel-soft);border-color:var(--caramel);color:var(--caramel-deep);font-weight:600}
-.opt.sel::after{content:" ✓"}
-.confirm{
-  margin-top:11px;width:100%;border:none;cursor:pointer;min-height:46px;border-radius:14px;
-  background:linear-gradient(135deg,var(--caramel),#E08A50);color:#FFF9F2;
-  font-family:var(--sans);font-size:15px;font-weight:600;letter-spacing:2px;
-  box-shadow:0 8px 20px rgba(217,113,60,.30);transition:all .18s ease;display:none;
-}
-.confirm:hover{transform:translateY(-1px);box-shadow:0 10px 24px rgba(217,113,60,.36)}
-.confirm:active{transform:scale(.98)}
-.confirm:disabled{opacity:.45;cursor:not-allowed;transform:none;box-shadow:none}
-.textwrap{display:none;flex-direction:column;gap:9px}
-.textwrap textarea{
-  width:100%;min-height:76px;resize:vertical;font-family:var(--sans);font-size:14.5px;
-  color:var(--cocoa);background:var(--card);border:1.5px solid var(--line);border-radius:14px;
-  padding:12px 14px;line-height:1.6;outline:none;transition:border-color .18s;
-}
-.textwrap textarea:focus{border-color:var(--caramel);box-shadow:0 0 0 3px rgba(217,113,60,.12)}
-.skip-row{display:flex;gap:9px;align-items:center}
-.btn-ghost{
-  flex:1;border:1.5px solid var(--line);background:transparent;color:var(--cocoa-soft);
-  font-family:var(--sans);font-size:14px;min-height:46px;border-radius:14px;cursor:pointer;transition:all .18s;
-}
-.btn-ghost:hover{border-color:var(--cocoa-soft);color:var(--cocoa)}
-.confirm.slim{margin-top:0}
-/* 量表 */
-.scalewrap{display:none;flex-direction:column;gap:10px;background:var(--card);border:1.5px solid var(--line);border-radius:16px;padding:16px 16px 14px;box-shadow:var(--shadow)}
-.scale-num{font-family:var(--serif);font-size:40px;font-weight:700;color:var(--caramel-deep);text-align:center;line-height:1;min-height:44px}
-.scale-labels{display:flex;justify-content:space-between;font-size:11.5px;color:var(--cocoa-soft)}
-input[type=range]{
-  -webkit-appearance:none;width:100%;height:8px;border-radius:99px;outline:none;
-  background:linear-gradient(90deg,var(--caramel) 0%,var(--caramel) 50%,var(--cream-deep) 50%,var(--cream-deep) 100%);
-}
-input[type=range]::-webkit-slider-thumb{
-  -webkit-appearance:none;width:26px;height:26px;border-radius:50%;
-  background:#fff;border:5px solid var(--caramel);cursor:grab;
-  box-shadow:0 3px 10px rgba(217,113,60,.4);
-}
-.scale-marks{display:flex;justify-content:space-between;font-size:10.5px;color:var(--cocoa-soft);padding:0 3px}
+.composer-inner{max-width:560px;margin:0 auto;padding:11px 14px calc(12px + env(safe-area-inset-bottom))}
+.typing-hint{font-size:11.5px;color:var(--cocoa-soft);margin-bottom:7px;display:none;align-items:center;gap:6px}
+.input-row{display:flex;gap:8px;align-items:flex-end}
+.input-row textarea{flex:1;resize:none;font-family:var(--sans);font-size:15px;color:var(--cocoa);background:var(--card);border:1.5px solid var(--line);border-radius:15px;padding:11px 14px;line-height:1.5;outline:none;max-height:110px;min-height:46px;transition:border-color .18s}
+.input-row textarea:focus{border-color:var(--caramel);box-shadow:0 0 0 3px rgba(217,113,60,.12)}
+.input-row textarea:disabled{background:var(--cream-deep);color:var(--cocoa-soft)}
+.send{flex:none;width:46px;height:46px;border:none;border-radius:14px;cursor:pointer;background:linear-gradient(135deg,var(--caramel),#E08A50);box-shadow:0 6px 16px rgba(217,113,60,.30);display:flex;align-items:center;justify-content:center;transition:all .18s}
+.send svg{width:20px;height:20px}
+.send:disabled{opacity:.45;box-shadow:none}
+.send:not(:disabled):hover{transform:translateY(-1px)}
+.send:not(:disabled):active{transform:scale(.94)}
+.end-row{display:flex;justify-content:center;margin-top:8px}
+.end-btn{border:none;background:transparent;color:var(--cocoa-soft);font-size:12px;letter-spacing:1px;cursor:pointer;padding:6px 12px;border-radius:10px;font-family:var(--sans)}
+.end-btn:hover{background:var(--cream-deep);color:var(--cocoa)}
+.retry{margin-top:7px;border:1.5px solid var(--caramel);background:#fff;color:var(--caramel-deep);font-size:13px;font-weight:600;padding:7px 16px;border-radius:12px;cursor:pointer;font-family:var(--sans)}
 
-/* 覆盖层：欢迎/完成 */
-.overlay{
-  position:fixed;inset:0;z-index:10;display:flex;align-items:center;justify-content:center;
-  background:radial-gradient(1200px 700px at 80% -10%,#FBE9D2 0%,var(--cream) 55%);
-  padding:22px;overflow-y:auto;
-}
+.overlay{position:fixed;inset:0;z-index:10;display:flex;align-items:center;justify-content:center;background:radial-gradient(1200px 700px at 80% -10%,#FBE9D2 0%,var(--cream) 55%);padding:22px;overflow-y:auto}
 .overlay.hidden{display:none}
-.panel{
-  width:100%;max-width:520px;background:var(--card);border:1px solid var(--line);
-  border-radius:26px;box-shadow:0 24px 60px rgba(93,63,32,.14);
-  padding:34px 30px 30px;position:relative;overflow:hidden;
-  animation:pop .5s cubic-bezier(.22,1,.36,1) both;
-}
-@keyframes pop{from{opacity:0;transform:translateY(18px) scale(.98)}to{opacity:1;transform:none}}
-.panel::before{
-  content:"";position:absolute;top:-46px;right:-46px;width:150px;height:150px;border-radius:50%;
-  background:var(--caramel-soft);opacity:.55;
-}
-.panel .paw-big{width:58px;height:58px;margin-bottom:14px}
+.panel{width:100%;max-width:520px;background:var(--card);border:1px solid var(--line);border-radius:26px;box-shadow:0 24px 60px rgba(93,63,32,.14);padding:32px 28px 28px;position:relative;overflow:hidden;animation:pop .5s cubic-bezier(.22,1,.36,1) both;margin:auto}
+@keyframes pop{from{opacity:0;transform:translateY(16px) scale(.98)}to{opacity:1;transform:none}}
+.panel::before{content:"";position:absolute;top:-46px;right:-46px;width:150px;height:150px;border-radius:50%;background:var(--caramel-soft);opacity:.55}
+.paw-big{width:54px;height:54px;margin-bottom:12px}
 .kicker{font-size:11px;letter-spacing:4px;color:var(--caramel-deep);font-weight:600}
-.panel h1{font-family:var(--serif);font-size:27px;margin:8px 0 12px;letter-spacing:.5px;line-height:1.35}
+.panel h1{font-family:var(--serif);font-size:26px;margin:8px 0 12px;line-height:1.4}
 .panel p{font-size:14px;line-height:1.9;color:var(--cocoa-soft)}
-.panel .meta{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0 20px}
-.chip{
-  font-size:12px;color:var(--caramel-deep);background:var(--caramel-soft);
-  border-radius:99px;padding:6px 13px;letter-spacing:.5px;font-weight:600;
-}
-.panel .go{
-  width:100%;border:none;cursor:pointer;min-height:50px;border-radius:15px;
-  background:linear-gradient(135deg,var(--caramel),#E08A50);color:#FFF9F2;
-  font-family:var(--sans);font-size:16px;font-weight:600;letter-spacing:3px;
-  box-shadow:0 10px 26px rgba(217,113,60,.32);transition:all .18s;
-}
-.panel .go:hover{transform:translateY(-2px);box-shadow:0 14px 32px rgba(217,113,60,.4)}
-.panel .go:active{transform:scale(.98)}
-.agree{display:flex;gap:9px;align-items:flex-start;margin:14px 0 18px;font-size:12.5px;color:var(--cocoa-soft);line-height:1.7}
+.meta{display:flex;gap:8px;flex-wrap:wrap;margin:15px 0 18px}
+.chip{font-size:12px;color:var(--caramel-deep);background:var(--caramel-soft);border-radius:99px;padding:6px 13px;font-weight:600}
+.agree{display:flex;gap:9px;align-items:flex-start;margin:12px 0 16px;font-size:12.5px;color:var(--cocoa-soft);line-height:1.7}
 .agree input{margin-top:3px;width:16px;height:16px;accent-color:var(--caramel);flex:none;cursor:pointer}
-/* 完成页 */
-.done-paw{width:64px;height:64px;margin:0 auto 12px;display:block}
-.summary{
-  background:var(--cream);border:1px solid var(--line);border-radius:16px;
-  padding:14px 16px;margin:16px 0;font-size:13px;line-height:1.9;color:var(--cocoa-soft);
-  max-height:180px;overflow-y:auto;
-}
-.summary b{color:var(--cocoa)}
+.go{width:100%;border:none;cursor:pointer;min-height:50px;border-radius:15px;background:linear-gradient(135deg,var(--caramel),#E08A50);color:#FFF9F2;font-family:var(--sans);font-size:16px;font-weight:600;letter-spacing:3px;box-shadow:0 10px 26px rgba(217,113,60,.32);transition:all .18s}
+.go:hover{transform:translateY(-2px)}
+.go:disabled{opacity:.45;cursor:not-allowed;transform:none}
+.note{font-size:11.5px;color:var(--cocoa-soft);text-align:center;margin-top:12px}
+
+.summary-box{background:var(--cream);border:1px solid var(--line);border-radius:16px;padding:14px 16px;margin:14px 0;max-height:240px;overflow-y:auto;font-size:13px;line-height:1.85;color:var(--cocoa-soft)}
+.summary-box b{color:var(--cocoa)}
+.summary-box .sec{margin-bottom:9px}
+.summary-box .sec h4{font-size:12px;color:var(--caramel-deep);letter-spacing:1px;margin-bottom:3px}
 .done-actions{display:flex;flex-direction:column;gap:9px}
-.done-actions .row2{display:flex;gap:9px}
-.btn-line{
-  flex:1;border:1.5px solid var(--caramel);background:#fff;color:var(--caramel-deep);
-  font-family:var(--sans);font-size:14px;font-weight:600;min-height:46px;border-radius:14px;cursor:pointer;transition:all .18s;
-}
+.row2{display:flex;gap:9px}
+.btn-line{flex:1;border:1.5px solid var(--caramel);background:#fff;color:var(--caramel-deep);font-family:var(--sans);font-size:14px;font-weight:600;min-height:46px;border-radius:14px;cursor:pointer;transition:background .18s}
 .btn-line:hover{background:var(--caramel-soft)}
-.note{font-size:11.5px;color:var(--cocoa-soft);text-align:center;margin-top:12px;letter-spacing:.3px}
+.err-box{background:#FDF0EA;border:1px solid #EFC5AC;border-radius:14px;padding:12px 14px;font-size:13px;color:#A5481F;line-height:1.7;margin-top:12px}
 @media (max-width:480px){
-  .panel{padding:26px 22px 24px;border-radius:22px}
-  .panel h1{font-size:23px}
-  .bubble{max-width:84%;font-size:14.5px}
+  .panel{padding:26px 20px 22px}
+  .panel h1{font-size:22px}
+  .bubble{max-width:86%;font-size:14.5px}
   .concept-card{max-width:94%}
+  .ph{font-size:9.5px}
 }
 </style>
 </head>
@@ -223,13 +121,20 @@ input[type=range]::-webkit-slider-thumb{
 
 <div class="app">
   <header class="topbar">
-    <div class="brand">
-      <svg class="paw" viewBox="0 0 64 64"><ellipse cx="32" cy="42" rx="13" ry="10" fill="#D9713C"/><circle cx="15" cy="27" r="6.5" fill="#D9713C"/><circle cx="27" cy="18" r="6.5" fill="#D9713C"/><circle cx="40" cy="18" r="6.5" fill="#D9713C"/><circle cx="50" cy="27" r="6.5" fill="#D9713C"/></svg>
-      <span id="brandName">爪爪研究所</span>
+    <div class="top-row">
+      <div class="brand">
+        <svg class="paw" viewBox="0 0 64 64"><ellipse cx="32" cy="42" rx="13" ry="10" fill="#D9713C"/><circle cx="15" cy="27" r="6.5" fill="#D9713C"/><circle cx="27" cy="18" r="6.5" fill="#D9713C"/><circle cx="40" cy="18" r="6.5" fill="#D9713C"/><circle cx="50" cy="27" r="6.5" fill="#D9713C"/></svg>
+        <span id="brandName">爪爪研究所</span>
+      </div>
+      <div class="live"><i></i><span>AI 访谈员在线</span></div>
     </div>
-    <div class="top-progress">
-      <div class="bar"><i id="barFill"></i></div>
-      <div class="num" id="stepNum">准备中</div>
+    <div class="phases" id="phases">
+      <div class="ph" data-ph="background">暖场</div>
+      <div class="ph" data-ph="pain">现状痛点</div>
+      <div class="ph" data-ph="concept">概念测试</div>
+      <div class="ph" data-ph="intent">购买意愿</div>
+      <div class="ph" data-ph="price">价格渠道</div>
+      <div class="ph" data-ph="closing">收尾</div>
     </div>
   </header>
 
@@ -237,83 +142,80 @@ input[type=range]::-webkit-slider-thumb{
 
   <footer class="composer">
     <div class="composer-inner">
-      <div class="hint" id="hint"></div>
-      <div class="opts" id="opts"></div>
-      <div class="textwrap" id="textwrap">
-        <textarea id="txt" placeholder="在这里输入你的想法..." maxlength="500"></textarea>
-        <div class="skip-row">
-          <button class="btn-ghost" id="skipBtn" style="display:none">跳过这题</button>
-          <button class="confirm slim" id="sendBtn" style="flex:1;display:block">发送</button>
-        </div>
+      <div class="typing-hint" id="typingHint"><span class="dots"><i></i><i></i><i></i></span> 小鹿正在输入</div>
+      <div class="input-row">
+        <textarea id="txt" rows="1" placeholder="输入你的想法..." maxlength="600"></textarea>
+        <button class="send" id="sendBtn" title="发送">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M4 12L20 4L14 12L20 20L4 12Z" stroke="#FFF9F2" stroke-width="2" stroke-linejoin="round"/></svg>
+        </button>
       </div>
-      <div class="scalewrap" id="scalewrap">
-        <div class="scale-num" id="scaleNum">5</div>
-        <input type="range" id="scaleRange" min="0" max="10" step="1" value="5">
-        <div class="scale-marks" id="scaleMarks"></div>
-        <div class="scale-labels"><span id="scaleLo">低</span><span id="scaleHi">高</span></div>
-        <button class="confirm slim" id="scaleBtn">确认</button>
-      </div>
-      <button class="confirm" id="multiConfirm">确认选择</button>
+      <div class="end-row"><button class="end-btn" id="endBtn">提前结束访谈</button></div>
     </div>
   </footer>
 </div>
 
-<!-- 欢迎屏 -->
 <div class="overlay" id="welcome">
   <div class="panel">
     <svg class="paw-big" viewBox="0 0 64 64"><ellipse cx="32" cy="42" rx="13" ry="10" fill="#D9713C"/><circle cx="15" cy="27" r="6.5" fill="#D9713C"/><circle cx="27" cy="18" r="6.5" fill="#D9713C"/><circle cx="40" cy="18" r="6.5" fill="#D9713C"/><circle cx="50" cy="27" r="6.5" fill="#D9713C"/></svg>
-    <div class="kicker">产品用户访谈</div>
-    <h1>聊聊你家毛孩子的玩具</h1>
-    <p>我们正在设计一款新的宠物玩具，想邀请真实的养宠人聊聊想法。这里没有标准答案，你的真实感受就是我们最想要的答案。</p>
+    <div class="kicker">AI 用户访谈</div>
+    <h1>和访谈员小鹿聊聊你家的毛孩子</h1>
+    <p>这是一场真人般的智能访谈：小鹿会像朋友一样和你聊天，听你讲养宠的日常、对玩具的想法，也会适时追问细节。你想说什么就说，没有问卷，没有标准答案。</p>
     <div class="meta">
-      <span class="chip">约 5-8 分钟</span>
-      <span class="chip">共 16 个小问题</span>
-      <span class="chip">手机上轻松完成</span>
+      <span class="chip">对话式 · 像聊天</span>
+      <span class="chip">约 5-10 分钟</span>
+      <span class="chip">内容仅用于研究</span>
     </div>
     <label class="agree">
       <input type="checkbox" id="agreeChk">
-      <span>我同意参与本次访谈，并知悉：回答仅用于产品研究，个人信息会被妥善保管，不会对外公开。</span>
+      <span>我同意参与访谈：对话仅用于产品研究，不收集姓名住址等隐私，可随时结束。</span>
     </label>
-    <button class="go" id="startBtn" disabled>开始访谈</button>
-    <div class="note">中断也没关系，手机会记住你答到哪儿了</div>
+    <button class="go" id="startBtn" disabled>开始和小鹿聊</button>
+    <div class="note">中断也没关系，手机会记住进度</div>
   </div>
 </div>
 
-<!-- 完成屏 -->
 <div class="overlay hidden" id="done">
   <div class="panel">
-    <svg class="done-paw" viewBox="0 0 64 64"><ellipse cx="32" cy="42" rx="13" ry="10" fill="#7C9473"/><circle cx="15" cy="27" r="6.5" fill="#7C9473"/><circle cx="27" cy="18" r="6.5" fill="#7C9473"/><circle cx="40" cy="18" r="6.5" fill="#7C9473"/><circle cx="50" cy="27" r="6.5" fill="#7C9473"/></svg>
-    <div class="kicker" style="text-align:center">访谈完成</div>
-    <h1 style="text-align:center">谢谢你，真的帮大忙了</h1>
-    <p style="text-align:center">你的每一条回答，都会变成这款玩具设计里的一部分。请把下面的访谈记录回传给邀请你的人。</p>
-    <div class="summary" id="summaryBox"></div>
+    <svg class="paw-big" viewBox="0 0 64 64"><ellipse cx="32" cy="42" rx="13" ry="10" fill="#7C9473"/><circle cx="15" cy="27" r="6.5" fill="#7C9473"/><circle cx="27" cy="18" r="6.5" fill="#7C9473"/><circle cx="40" cy="18" r="6.5" fill="#7C9473"/><circle cx="50" cy="27" r="6.5" fill="#7C9473"/></svg>
+    <div class="kicker">访谈完成</div>
+    <h1>谢谢你，帮大忙了</h1>
+    <p>小鹿已经整理好你们的对话要点。请把访谈记录回传给邀请你的人。</p>
+    <div class="summary-box" id="summaryBox"></div>
     <div class="done-actions">
       <div class="row2">
         <button class="btn-line" id="copyBtn">复制记录</button>
         <button class="btn-line" id="dlBtn">下载记录文件</button>
       </div>
-      <button class="go" id="againBtn" style="letter-spacing:1px">我再帮朋友填一份</button>
+      <button class="go" id="againBtn">我再帮朋友填一份</button>
     </div>
-    <div class="note" id="doneNote">记录包含你的全部回答，不含账号密码等敏感信息</div>
+    <div class="note">记录仅含对话与研究摘要，不含隐私敏感信息</div>
   </div>
 </div>
 
 <script>
 /* =====================================================================
- * 【访谈负责人配置区】发访谈前只需要改这里
+ * 【配置区】
  * ---------------------------------------------------------------------
- * 1. 把 concept 里的内容换成你们自己的产品概念（标题/一句话/卖点）
- * 2. concept.imageUrl 可以放产品概念图/渲染图的外链地址，留空则不显示
- * 3. brand / interviewer 按需修改
+ * api.key 填入大模型服务的 API Key（OpenAI 兼容接口）。
+ * 默认对接智谱开放平台 glm-4-flash（免费模型）：
+ *   base  = https://open.bigmodel.cn/api/paas/v4/chat/completions
+ *   model = glm-4-flash
+ * 也可替换为 DeepSeek / 硅基流动 / Kimi 等 OpenAI 兼容服务。
+ * 注意：Key 会出现在页面源码中，请使用免费模型额度，并可随时在
+ * 服务商后台重置 Key。
  * ===================================================================== */
 var CONFIG = {
   brand: "爪爪研究所",
   interviewer: "小鹿",
+  api: {
+    base: "https://open.bigmodel.cn/api/paas/v4/chat/completions",
+    key: "13aab3165e0845bea9b880fcc173e225.UsyLJlRtsg5iPWjI",
+    model: "glm-4-flash"
+  },
   concept: {
-    kicker: "产品概念卡",
     title: "喵汪伴玩 Pro · 智能互动逗宠玩具",
     sub: "一台会自己陪玩的玩具，独处时间不再无聊",
-    imageUrl: "",   // 例如 "https://xxx.com/concept.jpg"，留空则不显示图片
+    imageUrl: "",
     desc: "宠物靠近自动启动、离开自动休眠。旋转逗宠 + 可藏零食两种模式切换，一次充电用一整周。",
     points: [
       { b: "自动感应陪玩", t: "红外感应启动，宠物独自在家也能玩起来" },
@@ -324,644 +226,457 @@ var CONFIG = {
   }
 };
 
-/* ---------------------------------------------------------------------
- * 访谈流程定义（研究团队勿随意改动题目顺序与文案，避免影响数据一致性）
- * type: info | text | single | multi | scale
- * ------------------------------------------------------------------- */
-function petWord(a){
-  var t = a.q_pet;
-  if(!t) return "毛孩子";
-  if(t.indexOf("只养猫") > -1) return "猫咪";
-  if(t.indexOf("只养狗") > -1) return "狗狗";
-  if(t.indexOf("猫狗都有") > -1) return "猫和狗狗";
-  return "毛孩子";
+/* =====================  访谈专家系统提示词  ===================== */
+function buildSystemPrompt(){
+  var c = CONFIG.concept;
+  var conceptText = "产品名：" + c.title + "；定位：" + c.sub + "；描述：" + c.desc + "；卖点：" +
+    c.points.map(function(p){ return p.b + "（" + p.t + "）"; }).join("；");
+  return [
+    "你是" + CONFIG.interviewer + "，一位有十年经验的资深用户研究访谈专家，擅长消费品品类的用户访谈，此刻正在为「" + CONFIG.brand + "」做一场宠物玩具的产品概念验证访谈。受访者是通过链接进来的普通养宠人，大概率在手机上和你聊天。",
+    "",
+    "【产品概念】（ concept 阶段需要展示给受访者，并以它为话题依据 ）",
+    conceptText,
+    "",
+    "【访谈信息目标】（不必按顺序，自然推进，全部覆盖后即可收尾）",
+    "1. 宠物基本情况：养猫/狗/多只、大致年龄、性格活力程度",
+    "2. 玩具现状：家里有哪些玩具、多久买一次、单次预算大约多少",
+    "3. 痛点：现有玩具最不满意的地方（追问到具体场景）",
+    "4. 概念反应：展示概念卡后的第一印象、最吸引的点、顾虑",
+    "5. 购买意愿：0-10 分打分并追问原因（低分问障碍，高分问打动点）",
+    "6. 价格与渠道：心理合理价位、平时在哪买宠物玩具",
+    "7. 收尾：开放建议、是否愿意后续回访",
+    "",
+    "【对话风格】",
+    "- 像朋友聊天，口语、简短、有温度。每条回复一般 1-3 句话，绝不长篇大论",
+    "- 每次只问一个问题；受访者一句话带过时，用具体的追问挖细节（比如举个场景、问最近一次经历）",
+    "- 同一话题最多追问 2 次，避免盘问感；受访者明显不耐烦（回答变短、敷衍）就换话题或加快收尾",
+    "- 受访者说\"不知道\"就给个例子引导，不逼问",
+    "- 对受访者的分享给出简短共情回应（哪怕一两个词），再继续",
+    "- 受访者反问产品细节时：功能类可按概念卡口径简单澄清；价格和上市时间一律不透露，转而反问ta觉得多少钱合理",
+    "- 全程简体中文",
+    "",
+    "【硬性规则】",
+    "- 不收集真实姓名、住址、身份证、精确收入等隐私；不提供医疗或营养建议",
+    "- 不承诺未在概念卡中出现的产品能力",
+    "- 受访者表达不想继续时，礼貌收尾并输出结束标记",
+    "",
+    "【界面标记】（这些标记会被系统转成界面元素，受访者看不到标记文字本身；标记必须单独占一行）",
+    "- 进入新话题阶段时输出一行：[PHASE:background] / [PHASE:pain] / [PHASE:concept] / [PHASE:intent] / [PHASE:price] / [PHASE:closing]",
+    "- 需要展示产品概念卡时输出一行：[CONCEPT_CARD]（在 concept 阶段开始时使用，展示后再用一两句话引导受访者看）",
+    "- 信息目标基本完成、可以结束时，先输出一行：[INTERVIEW_DONE]，再输出简短温暖的告别语",
+    "- 除上述标记外不要输出其他方括号标记",
+    "",
+    "【节奏】整场访谈控制在 12-20 个来回。若对话已进行很久且信息基本齐了，主动收尾。"
+  ].join("\n");
 }
 
-var STEPS = [
-  { id:"q_name", module:"基本信息", type:"text",
-    ask:"我们先认识一下，怎么称呼你比较好？昵称就可以。",
-    placeholder:"例如：小王、阿黎...", required:true, hint:"输入昵称后点发送" },
+var SUMMARY_PROMPT = [
+  "你是用户研究团队的分析师。根据下面的访谈对话逐字稿，输出访谈总结。",
+  "只输出一个 JSON 对象，不要输出任何其他文字，格式：",
+  "{",
+  '"respondent_profile": "一句话画像（如：养3岁活泼橘猫的年轻上班族）",',
+  '"key_pain_points": ["痛点1","痛点2"],',
+  '"concept_feedback": {"first_impression":"...","attractions":["..."],"concerns":["..."]},',
+  '"purchase_intent": {"score": 数字0-10根据受访者表述推断, "reasons": ["..."]},',
+  '"price_expectation": "受访者心理价位",',
+  '"channels": ["渠道"],',
+  '"memorable_quotes": ["原话1","原话2"],',
+  '"follow_up_ok": true或false,',
+  '"researcher_notes": "给研究团队的1-2句观察建议"',
+  "}"
+].join("\n");
 
-  { id:"q_pet", module:"基本信息", type:"single",
-    ask:"你家里现在养的是猫咪、狗狗，还是猫狗都有？",
-    options:["只养猫","只养狗","猫狗都有","养其他宠物"] },
-
-  { id:"q_age", module:"基本信息", type:"single",
-    ask:function(a){ return "你家的" + petWord(a) + "现在多大了？"; },
-    options:["1岁以下","1-3岁","3-7岁","7岁以上","拿不太准"] },
-
-  { id:"q_char", module:"基本信息", type:"single",
-    ask:function(a){ return petWord(a) + "的性格更接近哪一种？"; },
-    options:["活力四射，闲不下来","高冷独立，爱答不理","粘人精，走哪跟哪","胆小慢热，需要哄","养了多只，性格不一样"] },
-
-  { id:"q_own", module:"现状了解", type:"multi",
-    ask:function(a){ return "家里现在都有哪些类型的玩具？可多选。"; },
-    options:["逗宠棒 / 互动拉绳类","毛绒 / 发声玩具","球类（弹力球、电动球）","猫抓板 / 磨牙啃咬类","益智漏食 / 藏食类","电动 / 智能玩具","基本没买过什么玩具"],
-    follow:{ label:"补充一下：" + "其中" + "{{pet}}" + "最喜欢的是哪一件？为什么？（选填，可直接发送跳过）", optional:true },
-    followFunc:function(a){ return "其中" + petWord(a) + "最喜欢的是哪一件？为什么？（选填，可直接发送跳过）"; } },
-
-  { id:"q_freq", module:"现状了解", type:"single",
-    ask:"大概多久会添置一次新玩具？",
-    options:["想到就买，没有固定频率","每月至少一次","两三个月一次","半年以上一次","基本不买，玩坏才换"] },
-
-  { id:"q_budget", module:"现状了解", type:"single",
-    ask:"单次买玩具的预算通常在多少？",
-    options:["20 元以内","20-50 元","50-100 元","100-200 元","200 元以上"] },
-
-  { id:"q_pain", module:"痛点挖掘", type:"multi",
-    ask:"现在的玩具，最让你头疼或不满意的是什么？可多选。",
-    options:["玩两天就吃灰，新鲜感太短","质量差，容易咬坏拆坏","不安全，担心误吞零件","清理麻烦，藏灰沾毛","有噪音，宠物反而不敢玩","它根本不感兴趣","没什么不满意的"],
-    followFunc:function(){ return "还有别的让你不满意的地方吗？（选填，可直接发送跳过）"; },
-    follow:{ optional:true } },
-
-  { id:"q_care", module:"决策因素", type:"multi",
-    ask:"下次挑玩具的时候，你最看重哪些？最多选 3 个。",
-    max:3,
-    options:["材质安全无毒","耐咬耐抓，经久耐用","能自己玩，独处不无聊","能跟我互动，增进感情","有益智或进食功能","颜值高，适合拍照晒图","价格实惠","品牌口碑好"] },
-
-  { id:"q_concept", module:"概念测试", type:"info",
-    ask:"谢谢你看到这里。接下来请你看看我们的新玩具概念——就像看一张产品情报卡。看完之后，我想听听你的真实感受，好坏都可以说。",
-    concept:true },
-
-  { id:"q_first", module:"概念测试", type:"single",
-    ask:"看完这张概念卡，你的第一感觉更接近哪一个？",
-    options:["挺有意思，想多了解一点","还行，但没什么特别","说不上来，有点犹豫","不太是我的菜"] },
-
-  { id:"q_attract", module:"概念测试", type:"multi",
-    ask:"这个概念里，最吸引你的是哪几点？可多选。",
-    options:["自动感应，宠物独处也能玩","模式多，不容易玩腻","安全材质和断电保护","续航长，不用老充电","能藏零食，边玩边吃","颜值在线，摆家里不违和","说实话，没有吸引我的点"],
-    followFunc:function(){ return "吸引你的具体是哪个细节？或者没被吸引的话，说说为什么。（选填）"; },
-    follow:{ optional:true } },
-
-  { id:"q_worry", module:"概念测试", type:"multi",
-    ask:"有没有什么让你犹豫或担心的地方？可多选。",
-    options:["怕它玩几次就腻","电动产品怕不耐用、怕坏","担心安全（夹爪子、误吞电池）","会不会太吵","清洁会不会麻烦","感觉价格不会便宜","没什么担心的"],
-    followFunc:function(){ return "具体的担心是什么？（选填，可直接发送跳过）"; },
-    follow:{ optional:true } },
-
-  { id:"q_buy", module:"概念测试", type:"scale",
-    ask:"如果这款玩具上市了，你购买它的意愿有多强？",
-    lo:"0 完全不会买", hi:"10 一定会买" },
-
-  { id:"q_buy_why", module:"概念测试", type:"text",
-    dynamicAsk:function(a){
-      var s = parseInt(a.q_buy, 10);
-      if(s <= 3) return "想多问一句：是什么让你不太想买它？";
-      if(s <= 6) return "要让购买意愿提高到 8 分以上，你觉得这款玩具还需要做到什么？";
-      return "最打动你、让你愿意下单的是什么？";
-    },
-    placeholder:"说说你的真实想法...", required:true,
-    hint:"这道题对我们特别重要，请务必回答" },
-
-  { id:"q_price", module:"价格与渠道", type:"single",
-    ask:function(a){ return "结合它的功能，你觉得定价多少比较合理？"; },
-    options:["50 元以内","50-100 元","100-150 元","150-200 元","200 元以上","说不准"] },
-
-  { id:"q_channel", module:"价格与渠道", type:"multi",
-    ask:"你平时习惯在哪里买宠物玩具？可多选。",
-    options:["电商平台（淘宝、京东、拼多多）","直播间 / 短视频带货","线下宠物店","大型商超","朋友宠友推荐后网购","基本不买玩具"] },
-
-  { id:"q_nps", module:"价格与渠道", type:"scale",
-    ask:"如果身边朋友养宠物，你会推荐这款玩具吗？",
-    lo:"0 绝对不会", hi:"10 一定会" },
-
-  { id:"q_open", module:"收尾", type:"text",
-    ask:"最后一个开放问题：关于这款玩具，或者买玩具这件事，你还有什么想对我们说的？",
-    placeholder:"任何想法都可以...", required:false },
-
-  { id:"q_contact", module:"收尾", type:"single",
-    ask:"访谈就到这里啦。如果产品有新进展，愿意再参与一次简短回访吗？",
-    options:["愿意，留个联系方式","看情况吧","这次就不用了"],
-    followFunc:function(a){ return String(a.q_contact).indexOf("愿意") === 0 ? "留下你的微信号或手机号，有进展第一时间找你（选填）。" : null; },
-    follow:{ optional:true } }
-];
-
-/* =====================  引擎部分（一般无需改动）  ===================== */
+/* =====================  引擎  ===================== */
 var $ = function(id){ return document.getElementById(id); };
 var chatInner = $("chatInner"), chat = $("chat");
+var PHASES = ["background","pain","concept","intent","price","closing"];
+var PHASE_LABEL = {background:"暖场",pain:"现状痛点",concept:"概念测试",intent:"购买意愿",price:"价格渠道",closing:"收尾"};
+
 var state = {
-  idx: 0,            // 当前进行到第几题
-  answers: {},       // {qid: {value, extra}}
-  followValues: {},  // 追问答案
-  conceptSeen: false,
+  messages: [],          // {role, content}
+  phase: "background",
+  conceptShown: false,
+  done: false,
   startedAt: null,
   finishedAt: null,
   sessionId: "P-" + Math.random().toString(36).slice(2, 8).toUpperCase(),
-  pendingFollow: null
+  pending: false,        // AI 回复中
+  summarized: false
 };
-var busy = false; // 访员说话中，输入锁定
 
 function save(){
-  try{
-    localStorage.setItem("pet_interview_v1", JSON.stringify(state));
-  }catch(e){}
+  try{ localStorage.setItem("pet_ai_interview_v2", JSON.stringify(state)); }catch(e){}
 }
-function load(){
+function restore(){
   try{
-    var raw = localStorage.getItem("pet_interview_v1");
+    var raw = localStorage.getItem("pet_ai_interview_v2");
     if(!raw) return false;
     var s = JSON.parse(raw);
-    if(!s || !s.sessionId) return false;
+    if(!s || !s.sessionId || !(s.messages && s.messages.length)) return false;
     state = s;
     return true;
   }catch(e){ return false; }
 }
 
-function scrollBottom(){
-  requestAnimationFrame(function(){
-    chat.scrollTop = chat.scrollHeight;
-  });
-}
+function scrollBottom(){ requestAnimationFrame(function(){ chat.scrollTop = chat.scrollHeight; }); }
 
-function botBubbleHTML(html, cls){
+var PAW_SVG = '<svg viewBox="0 0 64 64"><ellipse cx="32" cy="42" rx="13" ry="10" fill="#D9713C"/><circle cx="15" cy="27" r="6.5" fill="#D9713C"/><circle cx="27" cy="18" r="6.5" fill="#D9713C"/><circle cx="40" cy="18" r="6.5" fill="#D9713C"/><circle cx="50" cy="27" r="6.5" fill="#D9713C"/></svg>';
+
+function botRow(cls){
   var div = document.createElement("div");
   div.className = "row bot";
-  div.innerHTML =
-    '<div class="avatar"><svg viewBox="0 0 64 64"><ellipse cx="32" cy="42" rx="13" ry="10" fill="#D9713C"/><circle cx="15" cy="27" r="6.5" fill="#D9713C"/><circle cx="27" cy="18" r="6.5" fill="#D9713C"/><circle cx="40" cy="18" r="6.5" fill="#D9713C"/><circle cx="50" cy="27" r="6.5" fill="#D9713C"/></svg></div>' +
-    '<div class="bubble ' + (cls || "") + '">' + html + "</div>";
+  div.innerHTML = '<div class="avatar">' + PAW_SVG + '</div><div class="bubble ' + (cls||"") + '"></div>';
   chatInner.appendChild(div);
   scrollBottom();
   return div.querySelector(".bubble");
 }
-
-function meBubbleHTML(text){
+function meBubble(text){
   var div = document.createElement("div");
   div.className = "row me";
   div.innerHTML = '<div class="bubble"></div>';
   chatInner.appendChild(div);
-  var b = div.querySelector(".bubble");
-  b.textContent = text;
+  div.querySelector(".bubble").textContent = text;
   scrollBottom();
-  return b;
-}
-
-function typewriter(bubble, text, module, done){
-  var tag = module ? '<div class="tag">' + module + "</div>" : "";
-  bubble.innerHTML = tag + '<span class="tw"></span>';
-  var span = bubble.querySelector(".tw");
-  var i = 0;
-  var finishNow = function(){
-    clearInterval(timer);
-    span.textContent = text;
-    done && done();
-  };
-  var timer = setInterval(function(){
-    // 一次吐 2 个字符，节奏更快；页面切后台时直接完成，避免定时器被浏览器节流卡住
-    i += 2;
-    span.textContent = text.slice(0, i);
-    scrollBottom();
-    if(i >= text.length || document.hidden){
-      finishNow();
-    }
-  }, 24);
-  if(document.hidden){ finishNow(); }
-  // 点击气泡跳过打字
-  bubble.style.cursor = "pointer";
-  bubble.addEventListener("click", function(){
-    if(i < text.length){ i = text.length; span.textContent = text; }
-  });
-}
-
-function askOf(step){
-  if(typeof step.ask === "function") return step.ask(state.answers);
-  if(step.ask !== undefined) return step.ask;
-  if(typeof step.dynamicAsk === "function") return step.dynamicAsk(state.answers);
-  return step.dynamicAsk;
-}
-
-function askText(step){
-  var text = askOf(step);
-  var b = botBubbleHTML('<span class="dots"><i></i><i></i><i></i></span>');
-  busy = true;
-  setComposer("none");
-  setTimeout(function(){
-    typewriter(b, text, step.module, function(){
-      busy = false;
-      if(step.concept){ renderConceptCard(); return; }
-      setComposer("text", step);
-      $("txt").value = state.drafts && state.drafts[step.id] || "";
-      $("txt").placeholder = step.placeholder || "在这里输入你的想法...";
-      $("skipBtn").style.display = step.required ? "none" : "block";
-      $("hint").style.display = "block";
-      $("hint").textContent = step.hint || "";
-      $("txt").focus();
-    });
-  }, 350);
 }
 
 function renderConceptCard(){
+  if(state.conceptShown) return;
+  state.conceptShown = true;
   var c = CONFIG.concept;
+  var lis = c.points.map(function(p){
+    return '<li><svg class="ic" viewBox="0 0 64 64"><ellipse cx="32" cy="42" rx="13" ry="10" fill="#D9713C"/><circle cx="15" cy="27" r="6.5" fill="#D9713C"/><circle cx="27" cy="18" r="6.5" fill="#D9713C"/><circle cx="40" cy="18" r="6.5" fill="#D9713C"/><circle cx="50" cy="27" r="6.5" fill="#D9713C"/></svg><span><b>' + p.b + "</b>：" + p.t + "</span></li>";
+  }).join("");
+  var img = c.imageUrl ? '<img class="cc-img" src="' + c.imageUrl + '" alt="产品概念图" onerror="this.style.display=\'none\'">' : "";
   var div = document.createElement("div");
   div.className = "row bot";
-  var lis = "";
-  for(var i = 0; i < c.points.length; i++){
-    var p = c.points[i];
-    lis += '<li><svg class="ic" viewBox="0 0 64 64"><ellipse cx="32" cy="42" rx="13" ry="10" fill="#D9713C"/><circle cx="15" cy="27" r="6.5" fill="#D9713C"/><circle cx="27" cy="18" r="6.5" fill="#D9713C"/><circle cx="40" cy="18" r="6.5" fill="#D9713C"/><circle cx="50" cy="27" r="6.5" fill="#D9713C"/></svg><span><b>' + p.b + "</b>：" + p.t + "</span></li>";
-  }
-  var imgHtml = c.imageUrl ? '<img class="cc-img" src="' + c.imageUrl + '" alt="产品概念图" onerror="this.style.display=\'none\'">' : "";
   div.innerHTML =
-    '<div class="avatar"><svg viewBox="0 0 64 64"><ellipse cx="32" cy="42" rx="13" ry="10" fill="#D9713C"/><circle cx="15" cy="27" r="6.5" fill="#D9713C"/><circle cx="27" cy="18" r="6.5" fill="#D9713C"/><circle cx="40" cy="18" r="6.5" fill="#D9713C"/><circle cx="50" cy="27" r="6.5" fill="#D9713C"/></svg></div>' +
+    '<div class="avatar">' + PAW_SVG + '</div>' +
     '<div class="concept-card">' +
-      '<div class="cc-head"><div class="cc-kicker">' + c.kicker + '</div><div class="cc-title">' + c.title + '</div><div class="cc-sub">' + c.sub + "</div></div>" +
-      imgHtml +
-      '<div class="cc-body"><div class="cc-desc">' + c.desc + "<ul>" + lis + "</ul></div></div>" +
-    "</div>";
+      '<div class="cc-head"><div class="cc-kicker">产品概念卡</div><div class="cc-title">' + c.title + '</div><div class="cc-sub">' + c.sub + '</div></div>' +
+      img +
+      '<div class="cc-body"><div class="cc-desc">' + c.desc + '<ul>' + lis + '</ul></div></div>' +
+    '</div>';
   chatInner.appendChild(div);
   scrollBottom();
-  state.conceptSeen = true;
   save();
-  busy = false;
-  // 概念卡下方给一个"看完啦"按钮
-  setComposer("single", { id:"__concept_ok", type:"single", module:"", options:["看完啦，说说我的感受"] });
 }
 
-function renderOptions(step, selected){
-  var box = $("opts");
-  box.innerHTML = "";
-  var sel = selected || [];
-  step.options.forEach(function(op){
-    var btn = document.createElement("button");
-    btn.type = "button";
-    btn.className = "opt" + (sel.indexOf(op) > -1 ? " sel" : "");
-    btn.textContent = op;
-    btn.onclick = function(){
-      if(step.type === "single"){
-        $("opts").style.display = "none";
-        answer(step, op, null);
-      }else{
-        // multi
-        var cur = [];
-        var nodes = box.querySelectorAll(".opt");
-        nodes.forEach(function(n){ if(n.classList.contains("sel")) cur.push(n.textContent); });
-        var idx = cur.indexOf(op);
-        var limit = step.max || step.options.length;
-        if(idx > -1){ cur.splice(idx, 1); btn.classList.remove("sel"); }
-        else{
-          if(cur.length >= limit){
-            flashHint("最多选 " + limit + " 项，先取消一个再选吧");
-            return;
-          }
-          cur.push(op);
-          btn.classList.add("sel");
+function setPhase(ph){
+  if(PHASES.indexOf(ph) === -1) return;
+  var idx = PHASES.indexOf(ph);
+  state.phase = ph;
+  var nodes = document.querySelectorAll(".ph");
+  nodes.forEach(function(n, i){
+    n.classList.toggle("on", i === idx);
+    n.classList.toggle("done", i < idx);
+  });
+  save();
+}
+
+function setBusy(b){
+  state.pending = b;
+  $("typingHint").style.display = b ? "flex" : "none";
+  $("txt").disabled = b;
+  $("sendBtn").disabled = b;
+  if(!b) $("txt").focus();
+}
+
+/* 剥离界面标记，仅用于显示；标记效果另行处理 */
+function stripMarkers(text){
+  return text
+    .replace(/\[CONCEPT_CARD\]/g, "")
+    .replace(/\[PHASE:[a-z]+\]/g, "")
+    .replace(/\[INTERVIEW_DONE\]/g, "")
+    .replace(/\n{3,}/g, "\n\n")
+    .trim();
+}
+
+function handleMarkers(fullText){
+  var m;
+  m = fullText.match(/\[PHASE:([a-z]+)\]/g);
+  if(m){
+    var last = m[m.length - 1].match(/\[PHASE:([a-z]+)\]/)[1];
+    if(last !== state.phase) setPhase(last);
+  }
+  if(fullText.indexOf("[CONCEPT_CARD]") > -1 && !state.conceptShown){
+    renderConceptCard();
+  }
+  return fullText.indexOf("[INTERVIEW_DONE]") > -1;
+}
+
+/* 流式请求 */
+function requestReply(onDone, onError){
+  var bubble = botRow();
+  bubble.innerHTML = '<span class="tag">' + CONFIG.interviewer + '</span><span class="stream"></span><span class="cursor"></span>';
+  var streamEl = bubble.querySelector(".stream");
+
+  var apiMessages = [{ role: "system", content: buildSystemPrompt() }].concat(state.messages);
+  var acc = "";
+  var doneFlag = false;
+
+  setBusy(true);
+  fetch(CONFIG.api.base, {
+    method: "POST",
+    headers: { "Content-Type": "application/json", "Authorization": "Bearer " + CONFIG.api.key },
+    body: JSON.stringify({
+      model: CONFIG.api.model,
+      messages: apiMessages,
+      stream: true,
+      temperature: 0.8,
+      max_tokens: 500
+    })
+  }).then(function(resp){
+    if(!resp.ok){
+      return resp.text().then(function(t){
+        throw new Error("HTTP " + resp.status + " " + t.slice(0, 200));
+      });
+    }
+    var reader = resp.body.getReader();
+    var decoder = new TextDecoder("utf-8");
+    var buf = "";
+    function pump(){
+      return reader.read().then(function(r){
+        if(r.done){
+          finishStream();
+          return;
         }
-        var cf = $("multiConfirm");
-        cf.style.display = "block";
-        cf.disabled = cur.length === 0;
-        cf.textContent = cur.length === 0 ? "请至少选择 1 项" : "确认选择（已选 " + cur.length + (step.max ? "/" + step.max : "") + "）";
-      }
-    };
-    box.appendChild(btn);
-  });
-  box.style.display = "flex";
-  if(step.type === "multi"){
-    var cf = $("multiConfirm");
-    cf.style.display = "block";
-    cf.disabled = sel.length === 0;
-    cf.textContent = sel.length === 0 ? "请至少选择 1 项" : "确认选择（已选 " + sel.length + (step.max ? "/" + step.max : "") + "）";
-  }
-}
-
-function flashHint(msg){
-  var h = $("hint");
-  h.style.display = "block";
-  h.textContent = msg;
-}
-
-function setComposer(mode, step){
-  $("opts").style.display = "none";
-  $("textwrap").style.display = "none";
-  $("scalewrap").style.display = "none";
-  $("multiConfirm").style.display = "none";
-  $("hint").style.display = "none";
-  $("hint").textContent = "";
-  if(mode === "single" || mode === "multi") renderOptions(step, null);
-  else if(mode === "text") $("textwrap").style.display = "flex";
-  else if(mode === "scale") setupScale(step);
-}
-
-function setupScale(step){
-  var lo = step.lo || "低", hi = step.hi || "高";
-  $("scaleLo").textContent = lo;
-  $("scaleHi").textContent = hi;
-  var marks = $("scaleMarks");
-  marks.innerHTML = "";
-  for(var i = 0; i <= 10; i++){
-    var s = document.createElement("span");
-    s.textContent = i;
-    marks.appendChild(s);
-  }
-  var range = $("scaleRange");
-  range.value = 5;
-  paintRange(5);
-  $("scaleNum").textContent = 5;
-  range.oninput = function(){
-    $("scaleNum").textContent = range.value;
-    paintRange(range.value);
-  };
-  $("scaleBtn").onclick = function(){
-    $("scalewrap").style.display = "none";
-    answer(step, String(range.value), null);
-  };
-  $("scalewrap").style.display = "flex";
-  scrollBottom();
-}
-function paintRange(v){
-  var pct = (v / 10) * 100;
-  $("scaleRange").style.background = "linear-gradient(90deg, var(--caramel) 0%, var(--caramel) " + pct + "%, var(--cream-deep) " + pct + "%, var(--cream-deep) 100%)";
-}
-
-/* 记录一题答案并推进 */
-function answer(step, value, extra){
-  if(step.id === "__concept_ok"){
-    advance();
-    return;
-  }
-  state.answers[step.id] = value;
-  if(extra !== undefined && extra !== null && extra !== "") state.followValues[step.id] = extra;
-  meBubbleHTML(String(value) + (extra ? "｜" + extra : ""));
-  save();
-  advance();
-}
-
-function askFollow(step, text){
-  var b = botBubbleHTML('<span class="dots"><i></i><i></i><i></i></span>');
-  busy = true;
-  setComposer("none");
-  setTimeout(function(){
-    typewriter(b, text, "", function(){
-      busy = false;
-      state.pendingFollow = step.id;
-      setComposer("text", { id:"__follow", required:false });
-      $("txt").value = "";
-      $("txt").placeholder = "想说的都可以写在这里...";
-      $("skipBtn").style.display = "block";
-      $("hint").style.display = "block";
-      $("hint").textContent = "选填，直接发送或跳过都行";
-      $("txt").focus();
-    });
-  }, 300);
-}
-
-function advance(){
-  state.followAsked = state.followAsked || {};
-  // 若当前题有追问且尚未问过
-  var justAnswered = STEPS[state.idx];
-  if(justAnswered && !state.pendingFollow && justAnswered.followFunc && !state.followAsked[justAnswered.id]){
-    var fq = justAnswered.followFunc(state.answers);
-    if(fq){
-      state.followAsked[justAnswered.id] = true;
-      askFollow(justAnswered, fq);
+        buf += decoder.decode(r.value, { stream: true });
+        var lines = buf.split("\n");
+        buf = lines.pop();
+        lines.forEach(function(line){
+          var t = line.trim();
+          if(t.indexOf("data:") !== 0) return;
+          var payload = t.slice(5).trim();
+          if(payload === "[DONE]") return;
+          try{
+            var j = JSON.parse(payload);
+            var delta = j.choices && j.choices[0] && j.choices[0].delta && j.choices[0].delta.content;
+            if(delta){
+              acc += delta;
+              var show = stripMarkers(acc);
+              streamEl.textContent = show;
+              scrollBottom();
+            }
+          }catch(e){}
+        });
+        return pump();
+      });
+    }
+    return pump();
+  }).catch(function(err){
+    if(!acc){
+      bubble.innerHTML = '<span class="tag">' + CONFIG.interviewer + '</span><span>哎呀，网络开了一下小差（' + (err && err.message ? String(err.message).slice(0, 80) : "未知错误") + '）</span><br>';
+      var btn = document.createElement("button");
+      btn.className = "retry";
+      btn.textContent = "重试";
+      btn.onclick = function(){ bubble.closest(".row").remove(); setBusy(false); requestReply(onDone, onError); };
+      bubble.appendChild(btn);
+      setBusy(false);
+      scrollBottom();
+      onError && onError(err);
       return;
     }
-  }
-  state.pendingFollow = null;
-  state.idx = state.idx + 1;
-  save();
-  if(state.idx >= STEPS.length){
-    finish();
-    return;
-  }
-  runStep(STEPS[state.idx]);
-}
-
-function runStep(step){
-  updateProgress();
-  if(step.type === "single" || step.type === "multi"){
-    var text = askOf(step);
-    var b = botBubbleHTML('<span class="dots"><i></i><i></i><i></i></span>');
-    busy = true;
-    setComposer("none");
-    setTimeout(function(){
-      typewriter(b, text, step.module, function(){
-        busy = false;
-        setComposer(step.type, step);
-        scrollBottom();
-      });
-    }, 350);
-  }else if(step.type === "text"){
-    askText(step);
-  }else if(step.type === "scale"){
-    var t2 = askOf(step);
-    var b2 = botBubbleHTML('<span class="dots"><i></i><i></i><i></i></span>');
-    busy = true;
-    setComposer("none");
-    setTimeout(function(){
-      typewriter(b2, t2, step.module, function(){
-        busy = false;
-        setComposer("scale", step);
-      });
-    }, 350);
-  }else if(step.type === "info"){
-    var t3 = askOf(step);
-    var b3 = botBubbleHTML('<span class="dots"><i></i><i></i><i></i></span>');
-    busy = true;
-    setComposer("none");
-    setTimeout(function(){
-      typewriter(b3, t3, step.module, function(){
-        busy = false;
-        if(step.concept){ renderConceptCard(); }
-      });
-    }, 350);
-  }
-}
-
-function updateProgress(){
-  var pct = Math.round((state.idx / STEPS.length) * 100);
-  $("barFill").style.width = pct + "%";
-  $("stepNum").textContent = Math.min(state.idx + 1, STEPS.length) + " / " + STEPS.length;
-}
-
-/* 输入事件 */
-$("sendBtn").onclick = function(){
-  if(busy) return;
-  var step = STEPS[state.idx];
-  var isFollow = state.pendingFollow;
-  var val = $("txt").value.trim();
-  if(isFollow){
-    if(val){
-      state.followValues[isFollow] = val;
-      meBubbleHTML(val);
-    }else{
-      meBubbleHTML("（跳过了这题）");
-    }
-    state.pendingFollow = null;
-    save();
-    advance();
-    return;
-  }
-  if(step && step.type === "text"){
-    if(!val && step.required){
-      flashHint("这题需要填一下才能继续哦");
-      $("txt").focus();
-      return;
-    }
-    $("textwrap").style.display = "none";
-    if(!val && !step.required){
-      answer(step, "（跳过了这题）", null);
-    }else{
-      answer(step, val, null);
-    }
-  }
-};
-$("skipBtn").onclick = function(){
-  if(busy) return;
-  var isFollow = state.pendingFollow;
-  $("textwrap").style.display = "none";
-  if(isFollow){
-    meBubbleHTML("（跳过了这题）");
-    state.pendingFollow = null;
-    save();
-    advance();
-  }else{
-    var step = STEPS[state.idx];
-    if(step && step.type === "text" && !step.required){
-      answer(step, "（跳过了这题）", null);
-    }
-  }
-};
-$("multiConfirm").onclick = function(){
-  if(busy) return;
-  var step = STEPS[state.idx];
-  if(!step || step.type !== "multi") return;
-  var cur = [];
-  document.querySelectorAll("#opts .opt").forEach(function(n){
-    if(n.classList.contains("sel")) cur.push(n.textContent);
+    finishStream();
   });
-  if(cur.length === 0) return;
-  $("opts").style.display = "none";
-  $("multiConfirm").style.display = "none";
-  answer(step, cur.join("、"), null);
-};
-$("txt").addEventListener("keydown", function(e){
-  if(e.key === "Enter" && !e.shiftKey){
-    e.preventDefault();
-    $("sendBtn").click();
-  }
-});
 
-/* 欢迎屏 */
-var agreeChk = $("agreeChk"), startBtn = $("startBtn");
-agreeChk.onchange = function(){ startBtn.disabled = !agreeChk.checked; };
-startBtn.onclick = function(){
-  $("welcome").classList.add("hidden");
-  if(!state.startedAt){
-    state.startedAt = new Date().toISOString();
+  function finishStream(){
+    if(doneFlag) return;
+    doneFlag = true;
+    var clean = stripMarkers(acc) || "（嗯，我刚刚走神了，你可以再说一遍吗？）";
+    bubble.innerHTML = '<span class="tag">' + CONFIG.interviewer + '</span>';
+    bubble.appendChild(document.createTextNode(clean));
+    var wasDone = handleMarkers(acc);
+    state.messages.push({ role: "assistant", content: acc });
+    setBusy(false);
     save();
-  }
-  resumeOrStart();
-};
-
-/* 恢复或开始 */
-function resumeOrStart(){
-  // 恢复：把已答题目快速重放
-  if(state.idx > 0){
-    botBubbleHTML("欢迎回来，我们接着聊。这是你之前答过的内容，确认无误就直接继续：");
-    for(var i = 0; i < state.idx; i++){
-      var st = STEPS[i];
-      var q = typeof st.ask === "function" ? st.ask(state.answers) : st.ask;
-      if(q) botBubbleHTML(q);
-      var a = state.answers[st.id];
-      if(a !== undefined){
-        var extra = state.followValues[st.id];
-        meBubbleHTML(String(Array.isArray(a) ? a.join("、") : a) + (extra ? "｜" + extra : ""));
-      }
-      if(st.type === "info" && st.concept){ renderConceptCard(); }
+    scrollBottom();
+    if(wasDone && !state.done){
+      state.done = true;
+      state.finishedAt = new Date().toISOString();
+      save();
+      onDone && onDone();
+    } else {
+      onDone && onDone();
     }
-    // 恢复历史追问答案的展示
-  }
-  var step = STEPS[state.idx];
-  if(step){
-    runStep(step);
-  }else{
-    finish();
   }
 }
 
-/* 完成 */
-function finish(){
-  updateProgress(true);
-  $("barFill").style.width = "100%";
-  $("stepNum").textContent = "已完成";
-  setComposer("none");
-  state.finishedAt = new Date().toISOString();
+function sendUser(text){
+  state.messages.push({ role: "user", content: text });
+  meBubble(text);
   save();
-  buildSummary();
-  setTimeout(function(){ $("done").classList.remove("hidden"); }, 600);
+  requestReply();
 }
 
-function buildSummary(){
+/* 完成流程 */
+function showSummary(){
+  buildSummaryOutput();
+  setTimeout(function(){ $("done").classList.remove("hidden"); }, 500);
+}
+
+var recordOutput = null;
+
+function buildSummaryOutput(){
   var lines = [];
-  var map = {};
-  STEPS.forEach(function(st, i){
-    if(st.type === "info") return;
-    var q = st.id === "q_buy_why"
-      ? st.dynamicAsk(state.answers)
-      : (typeof st.ask === "function" ? st.ask(state.answers) : st.ask);
-    var a = state.answers[st.id];
-    if(a === undefined) return;
-    var extra = state.followValues[st.id];
-    map[st.id] = { index: i, module: st.module, question: q, answer: a, followUp: extra || "" };
-    lines.push("【" + st.module + "】" + q);
-    lines.push("答：" + a + (extra ? "｜补充：" + extra : ""));
-    lines.push("");
+  state.messages.forEach(function(m){
+    if(m.role === "system") return;
+    var who = m.role === "user" ? "受访者" : CONFIG.interviewer;
+    var t = stripMarkers(m.content);
+    if(t) lines.push(who + "：" + t);
   });
+  var transcript = lines.join("\n\n");
+
   var meta = {
     受访者编号: state.sessionId,
-    昵称: state.answers.q_name || "",
     开始时间: state.startedAt,
-    完成时间: state.finishedAt,
+    结束时间: state.finishedAt || new Date().toISOString(),
+    轮次: state.messages.filter(function(m){ return m.role === "user"; }).length,
     设备: navigator.userAgent
   };
-  var record = { meta: meta, answers: map };
-  var summary = "受访者编号：" + state.sessionId + "｜昵称：" + (state.answers.q_name || "匿名") + "\n\n" + lines.join("\n");
-  $("summaryBox").innerHTML = summary.replace(/\n/g, "<br>");
+
+  recordOutput = {
+    meta: meta,
+    summary: state.aiSummary || null,
+    transcript: transcript
+  };
+
+  var box = $("summaryBox");
+  if(state.aiSummary){
+    var s = state.aiSummary;
+    box.innerHTML =
+      '<div class="sec"><h4>受访者画像</h4>' + esc(s.respondent_profile) + '</div>' +
+      '<div class="sec"><h4>核心痛点</h4>' + esc((s.key_pain_points||[]).join("、")) + '</div>' +
+      '<div class="sec"><h4>概念反馈</h4>' + esc("第一印象：" + (s.concept_feedback&&s.concept_feedback.first_impression||"") + "｜吸引：" + ((s.concept_feedback&&s.concept_feedback.attractions)||[]).join("、") + "｜顾虑：" + ((s.concept_feedback&&s.concept_feedback.concerns)||[]).join("、")) + '</div>' +
+      '<div class="sec"><h4>购买意愿</h4>' + esc((s.purchase_intent ? s.purchase_intent.score + "/10，" + (s.purchase_intent.reasons||[]).join("；") : "")) + '</div>' +
+      '<div class="sec"><h4>价格与渠道</h4>' + esc((s.price_expectation||"") + "｜" + (s.channels||[]).join("、")) + '</div>' +
+      '<div class="sec"><h4>给研究的建议</h4>' + esc(s.researcher_notes||"") + '</div>';
+  }else{
+    box.innerHTML = '<div class="sec">对话已完成。点"复制记录"可导出完整逐字稿。</div>';
+  }
 
   $("copyBtn").onclick = function(){
-    var self = this;
-    function flash(){ self.textContent = "已复制"; setTimeout(function(){ self.textContent = "复制记录"; }, 1600); }
+    var txt = "【" + CONFIG.brand + " 宠物玩具访谈记录】\n受访者编号：" + state.sessionId + "\n\n" +
+      (state.aiSummary ? ("【AI 访谈小结】\n" + JSON.stringify(state.aiSummary, null, 2) + "\n\n") : "") +
+      "【访谈逐字稿】\n" + transcript;
+    function flash(){ this.textContent = "已复制"; var b=this; setTimeout(function(){ b.textContent = "复制记录"; }, 1600); }
     if(navigator.clipboard && navigator.clipboard.writeText){
-      navigator.clipboard.writeText(summary).then(flash, function(){ fallbackCopy(summary); flash(); });
-    }else{
-      fallbackCopy(summary); flash();
-    }
+      navigator.clipboard.writeText(txt).then(function(){ var b=$("copyBtn"); b.textContent="已复制"; setTimeout(function(){ b.textContent="复制记录"; },1600); },
+        function(){ fallbackCopy(txt); });
+    }else{ fallbackCopy(txt); }
   };
   $("dlBtn").onclick = function(){
-    var blob = new Blob([JSON.stringify(record, null, 2)], { type: "application/json" });
+    var blob = new Blob([JSON.stringify(recordOutput, null, 2)], { type: "application/json" });
     var url = URL.createObjectURL(blob);
-    var aEl = document.createElement("a");
-    aEl.href = url;
-    aEl.download = "宠物玩具访谈记录_" + state.sessionId + ".json";
-    document.body.appendChild(aEl);
-    aEl.click();
-    document.body.removeChild(aEl);
+    var a = document.createElement("a");
+    a.href = url; a.download = "宠物玩具AI访谈_" + state.sessionId + ".json";
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
     setTimeout(function(){ URL.revokeObjectURL(url); }, 800);
   };
-  $("againBtn").onclick = function(){
-    try{ localStorage.removeItem("pet_interview_v1"); }catch(e){}
-    location.reload();
-  };
+}
+
+function requestSummary(){
+  var apiMessages = [
+    { role: "system", content: SUMMARY_PROMPT },
+    { role: "user", content: "访谈逐字稿：\n" + state.messages.filter(function(m){return m.role!=="system";}).map(function(m){
+        return (m.role === "user" ? "受访者" : CONFIG.interviewer) + "：" + stripMarkers(m.content);
+      }).join("\n") }
+  ];
+  fetch(CONFIG.api.base, {
+    method: "POST",
+    headers: { "Content-Type": "application/json", "Authorization": "Bearer " + CONFIG.api.key },
+    body: JSON.stringify({ model: CONFIG.api.model, messages: apiMessages, stream: false, temperature: 0.3, max_tokens: 800 })
+  }).then(function(r){ return r.json(); }).then(function(j){
+    try{
+      var txt = j.choices[0].message.content;
+      var mm = txt.match(/\{[\s\S]*\}/);
+      state.aiSummary = JSON.parse(mm ? mm[0] : txt);
+    }catch(e){ state.aiSummary = null; }
+    state.summarized = true;
+    save();
+    showSummary();
+  }).catch(function(){ state.aiSummary = null; showSummary(); });
+}
+
+function esc(s){
+  return String(s == null ? "" : s)
+    .replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/\n/g,"<br>");
 }
 function fallbackCopy(text){
   var ta = document.createElement("textarea");
-  ta.value = text;
-  ta.style.position = "fixed";
-  ta.style.opacity = "0";
-  document.body.appendChild(ta);
-  ta.select();
+  ta.value = text; ta.style.position = "fixed"; ta.style.opacity = "0";
+  document.body.appendChild(ta); ta.select();
   try{ document.execCommand("copy"); }catch(e){}
   document.body.removeChild(ta);
 }
 
-/* 初始化 */
+/* 输入区 */
+$("txt").addEventListener("keydown", function(e){
+  if(e.key === "Enter" && !e.shiftKey){ e.preventDefault(); $("sendBtn").click(); }
+});
+$("txt").addEventListener("input", function(){
+  this.style.height = "auto";
+  this.style.height = Math.min(this.scrollHeight, 110) + "px";
+});
+$("sendBtn").onclick = function(){
+  if(state.pending || state.done) return;
+  var v = $("txt").value.trim();
+  if(!v) return;
+  $("txt").value = "";
+  $("txt").style.height = "auto";
+  sendUser(v);
+};
+$("endBtn").onclick = function(){
+  if(state.done) return;
+  if(!confirm("确定提前结束访谈吗？已聊内容会整理成记录。")) return;
+  if(!state.pending){
+    state.done = true;
+    state.finishedAt = new Date().toISOString();
+    save();
+    requestSummary();
+  }
+};
+
+/* 启动 */
 $("brandName").textContent = CONFIG.brand;
 document.title = CONFIG.brand + " · 宠物玩具访谈";
-var restored = load();
-if(restored && state.idx > 0){
-  startBtn.disabled = false;
-  agreeChk.checked = true;
-  startBtn.textContent = "继续上次的访谈";
-  $("welcome").querySelector("p").textContent = "检测到你上次已经答到第 " + Math.min(state.idx + 1, STEPS.length) + " 题，勾选同意后可以直接接着聊。";
+
+var hasKey = !!CONFIG.api.key;
+var restored = hasKey ? restore() : false;
+
+if(!hasKey){
+  document.querySelector(".panel").innerHTML =
+    '<div class="kicker">访谈室准备中</div>' +
+    '<h1>访谈暂未开放</h1>' +
+    '<div class="err-box">AI 访谈员还没有接入服务（缺少 API Key 配置）。<br>请联系邀请你的人，在页面 CONFIG 区域填入大模型 API Key 后重新发布。</div>';
+  $("agreeChk").disabled = true;
+}else{
+  $("agreeChk").onchange = function(){ $("startBtn").disabled = !this.checked; };
 }
+
+$("startBtn").onclick = function(){
+  $("welcome").classList.add("hidden");
+  if(restored && state.messages.length){
+    // 恢复历史
+    setPhase(state.phase);
+    state.messages.forEach(function(m){
+      if(m.role === "system") return;
+      if(m.role === "user"){ meBubble(stripMarkers(m.content)); return; }
+      var txt = stripMarkers(m.content);
+      if(txt){ var b = botRow(); b.innerHTML = '<span class="tag">' + CONFIG.interviewer + '</span>'; b.appendChild(document.createTextNode(txt)); }
+    });
+    if(state.conceptShown) renderConceptCard();
+    if(state.done){
+      requestSummary();
+    }else{
+      setBusy(false);
+    }
+    return;
+  }
+  state.startedAt = new Date().toISOString();
+  save();
+  setPhase("background");
+  requestReply();
+};
 </script>
 </body>
 </html>
