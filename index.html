@@ -660,6 +660,7 @@ $("startBtn").onclick = function(){
     setPhase(state.phase);
     state.messages.forEach(function(m){
       if(m.role === "system") return;
+      if(m.role === "user" && m.content.indexOf("[系统信号]") === 0) return;
       if(m.role === "user"){ meBubble(stripMarkers(m.content)); return; }
       var txt = stripMarkers(m.content);
       if(txt){ var b = botRow(); b.innerHTML = '<span class="tag">' + CONFIG.interviewer + '</span>'; b.appendChild(document.createTextNode(txt)); }
@@ -675,6 +676,9 @@ $("startBtn").onclick = function(){
   state.startedAt = new Date().toISOString();
   save();
   setPhase("background");
+  // 智谱等接口要求 messages 中必须含 user 消息，开场用系统信号触发
+  state.messages.push({ role: "user", content: "[系统信号] 受访者刚进入访谈室，请用一两句话自然开场并开始暖场。" });
+  save();
   requestReply();
 };
 </script>
