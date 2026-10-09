@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>访谈回传管理平台</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cellipse cx='32' cy='42' rx='13' ry='10' fill='%237C9473'/%3E%3Ccircle cx='15' cy='27' r='6.5' fill='%237C9473'/%3E%3Ccircle cx='27' cy='18' r='6.5' fill='%237C9473'/%3E%3Ccircle cx='40' cy='18' r='6.5' fill='%237C9473'/%3E%3Ccircle cx='50' cy='27' r='6.5' fill='%237C9473'/%3E%3C/svg%3E">
+<style>
+:root{
+  --cream:#FAF5EC; --cream-deep:#F3EADA; --cocoa:#3D2B1F; --cocoa-soft:#6B5645;
+  --caramel:#D9713C; --caramel-deep:#B95A28; --caramel-soft:#F6DEC8;
+  --sage:#7C9473; --card:#FFFFFF; --line:#E8DCC8;
+  --serif:Georgia,"Times New Roman","Songti SC","STSong","SimSun",serif;
+  --sans:-apple-system,"PingFang SC","HarmonyOS Sans SC","Microsoft YaHei",system-ui,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{font-family:var(--sans);background:var(--cream);color:var(--cocoa);min-height:100vh}
+body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240' viewBox='0 0 240 240'%3E%3Cg fill='%237C9473' fill-opacity='0.05'%3E%3Cellipse cx='60' cy='150' rx='18' ry='14'/%3E%3Ccircle cx='38' cy='126' r='8'/%3E%3Ccircle cx='56' cy='116' r='8'/%3E%3Ccircle cx='76' cy='120' r='8'/%3E%3Ccircle cx='90' cy='134' r='8'/%3E%3C/g%3E%3C/svg%3E");}
+.wrap{position:relative;z-index:1;max-width:960px;margin:0 auto;padding:24px 18px 60px}
+header{display:flex;align-items:center;gap:12px;margin-bottom:6px}
+header .paw{width:34px;height:34px}
+h1{font-family:var(--serif);font-size:24px;letter-spacing:.5px}
+.sub{font-size:12.5px;color:var(--cocoa-soft);margin:4px 0 22px;letter-spacing:.3px}
+.tools{display:flex;gap:9px;align-items:center;flex-wrap:wrap;margin-bottom:18px}
+.search{flex:1;min-width:200px;border:1.5px solid var(--line);background:#fff;border-radius:13px;padding:10px 14px;font-size:14px;font-family:var(--sans);color:var(--cocoa);outline:none}
+.search:focus{border-color:var(--sage)}
+.btn{border:1.5px solid var(--sage);background:#fff;color:#5B7355;font-family:var(--sans);font-size:13.5px;font-weight:600;padding:10px 16px;border-radius:13px;cursor:pointer;transition:all .18s}
+.btn:hover{background:#EDF3EB}
+.btn.primary{background:linear-gradient(135deg,var(--sage),#93AF89);color:#fff;border:none;box-shadow:0 6px 16px rgba(124,148,115,.3)}
+
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:11px;margin-bottom:22px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:17px;padding:15px 17px;box-shadow:0 4px 14px rgba(93,63,32,.06)}
+.stat .k{font-size:11.5px;color:var(--cocoa-soft);letter-spacing:1px}
+.stat .v{font-family:var(--serif);font-size:28px;font-weight:700;margin-top:4px;color:var(--caramel-deep)}
+.stat .v.green{color:var(--sage)}
+.stat .d{font-size:11px;color:var(--cocoa-soft);margin-top:2px}
+
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:17px 19px;margin-bottom:13px;box-shadow:0 4px 14px rgba(93,63,32,.06);cursor:pointer;transition:all .18s}
+.card:hover{transform:translateY(-1px);box-shadow:0 8px 22px rgba(93,63,32,.10)}
+.card .top{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.card .num{font-family:var(--serif);font-weight:700;font-size:16px}
+.card .score{margin-left:auto;font-family:var(--serif);font-weight:700;font-size:15px;color:var(--caramel-deep);background:var(--caramel-soft);padding:4px 12px;border-radius:99px}
+.card .time{font-size:11.5px;color:var(--cocoa-soft)}
+.card .profile{font-size:13.5px;color:var(--cocoa-soft);margin-top:6px;line-height:1.6}
+.card .pains{font-size:12.5px;color:var(--cocoa-soft);margin-top:5px;line-height:1.6}
+.card .pains b{color:var(--cocoa)}
+.badge{font-size:11px;padding:3px 10px;border-radius:99px;background:var(--cream-deep);color:var(--cocoa-soft);font-weight:600}
+.badge.cat{background:#E8F0E6;color:#5B7355}
+.detail{display:none;margin-top:13px;border-top:1px dashed var(--line);padding-top:13px}
+.card.open .detail{display:block}
+.detail h4{font-size:12px;color:var(--caramel-deep);letter-spacing:1.5px;margin:10px 0 5px}
+.detail p, .detail li{font-size:13.5px;line-height:1.85;color:var(--cocoa)}
+.detail ul{list-style:none}
+.detail ul li{padding-left:14px;position:relative}
+.detail ul li::before{content:"·";position:absolute;left:2px;color:var(--caramel);font-weight:700}
+.detail .quotes{background:var(--cream);border-radius:12px;padding:11px 14px;font-size:13px;line-height:1.8;color:var(--cocoa-soft)}
+.detail .notes{background:#EDF3EB;border-radius:12px;padding:11px 14px;font-size:13px;line-height:1.8;color:#4E6349}
+.transcript-toggle{margin-top:10px;font-size:12.5px;color:var(--sage);cursor:pointer;font-weight:600}
+.transcript{display:none;background:var(--cream);border-radius:12px;padding:12px 14px;font-size:12.5px;line-height:1.9;color:var(--cocoa-soft);max-height:320px;overflow-y:auto;margin-top:8px;white-space:pre-wrap}
+.card.open .transcript.show{display:block}
+.empty{text-align:center;padding:70px 20px;color:var(--cocoa-soft)}
+.empty .paw{width:60px;height:60px;opacity:.5;margin-bottom:14px}
+.err{background:#FDF0EA;border:1px solid #EFC5AC;border-radius:14px;padding:14px 16px;font-size:13.5px;color:#A5481F;line-height:1.7;margin:18px 0}
+.gate{position:fixed;inset:0;z-index:5;display:flex;align-items:center;justify-content:center;background:var(--cream);padding:20px}
+.gate.hidden{display:none}
+.gate .panel{width:100%;max-width:440px;background:var(--card);border:1px solid var(--line);border-radius:24px;padding:30px 26px;box-shadow:0 24px 60px rgba(93,63,32,.14)}
+.gate h2{font-family:var(--serif);font-size:22px;margin:10px 0 8px}
+.gate p{font-size:13px;color:var(--cocoa-soft);line-height:1.8;margin-bottom:14px}
+.gate input{width:100%;border:1.5px solid var(--line);border-radius:13px;padding:12px 14px;font-size:14px;font-family:var(--sans);outline:none;margin-bottom:12px;color:var(--cocoa)}
+.gate input:focus{border-color:var(--sage)}
+.gate .go{width:100%;border:none;cursor:pointer;min-height:48px;border-radius:14px;background:linear-gradient(135deg,var(--sage),#93AF89);color:#fff;font-family:var(--sans);font-size:15px;font-weight:600;letter-spacing:2px}
+.loading{text-align:center;padding:60px;color:var(--cocoa-soft);font-size:14px}
+.toast{position:fixed;left:50%;bottom:30px;transform:translateX(-50%) translateY(80px);background:var(--cocoa);color:#FFF6EC;font-size:13.5px;padding:11px 22px;border-radius:99px;opacity:0;transition:all .3s;z-index:20}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+@media (max-width:560px){ h1{font-size:20px} .stat .v{font-size:22px} }
+</style>
+</head>
+<body>
+
+<div class="gate" id="gate">
+  <div class="panel">
+    <svg class="paw" style="width:44px;height:44px" viewBox="0 0 64 64"><ellipse cx="32" cy="42" rx="13" ry="10" fill="#7C9473"/><circle cx="15" cy="27" r="6.5" fill="#7C9473"/><circle cx="27" cy="18" r="6.5" fill="#7C9473"/><circle cx="40" cy="18" r="6.5" fill="#7C9473"/><circle cx="50" cy="27" r="6.5" fill="#7C9473"/></svg>
+    <h2>访谈回传管理平台</h2>
+    <p>粘贴平台访问令牌（Token）进入。令牌只保存在本机浏览器，不会发给任何人。</p>
+    <input type="password" id="tokenInput" placeholder="粘贴 Token（ghp_ 或 github_pat_ 开头）" autocomplete="off">
+    <button class="go" id="loginBtn">进入管理平台</button>
+    <p style="margin:12px 0 0;font-size:11.5px">出错时可到 GitHub → Settings → Developer settings 重新生成</p>
+  </div>
+</div>
+
+<div class="wrap">
+  <header>
+    <svg class="paw" viewBox="0 0 64 64"><ellipse cx="32" cy="42" rx="13" ry="10" fill="#7C9473"/><circle cx="15" cy="27" r="6.5" fill="#7C9473"/><circle cx="27" cy="18" r="6.5" fill="#7C9473"/><circle cx="40" cy="18" r="6.5" fill="#7C9473"/><circle cx="50" cy="27" r="6.5" fill="#7C9473"/></svg>
+    <div>
+      <h1>宠物玩具访谈 · 回传管理</h1>
+      <div class="sub">所有通过访谈页「一键回传」的记录都会汇集到这里</div>
+    </div>
+  </header>
+
+  <div class="tools">
+    <input class="search" id="searchBox" placeholder="搜索编号 / 画像 / 痛点关键词...">
+    <button class="btn" id="refreshBtn">刷新</button>
+    <button class="btn" id="csvBtn">导出 CSV</button>
+    <button class="btn" id="jsonBtn">导出 JSON</button>
+  </div>
+
+  <div class="stats" id="stats"></div>
+
+  <div id="list"></div>
+  <div class="toast" id="toast"></div>
+</div>
+
+<script>
+var OWNER = "22Hyu", REPO = "pet-toy-interview";
+var token = "";
+var records = [];
+
+var $ = function(id){ return document.getElementById(id); };
+
+function toast(msg){
+  var t = $("toast");
+  t.textContent = msg;
+  t.classList.add("show");
+  setTimeout(function(){ t.classList.remove("show"); }, 2200);
+}
+
+function esc(s){
+  return String(s == null ? "" : s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+}
+
+/* ---- 登录 ---- */
+$("loginBtn").onclick = function(){
+  token = $("tokenInput").value.trim();
+  if(!token){ toast("请先粘贴 Token"); return; }
+  this.disabled = true; this.textContent = "验证中...";
+  fetch("https://api.github.com/repos/" + OWNER + "/" + REPO + "/issues?state=open&per_page=1", {
+    headers: { "Authorization": "Bearer " + token, "Accept": "application/vnd.github+json" }
+  }).then(function(r){
+    if(r.status === 200){
+      try{ localStorage.setItem("pet_admin_token", token); }catch(e){}
+      $("gate").classList.add("hidden");
+      load();
+    }else{
+      toast("Token 无效或无权访问（HTTP " + r.status + "）");
+      $("loginBtn").disabled = false; $("loginBtn").textContent = "进入管理平台";
+    }
+  }).catch(function(){
+    toast("网络错误，请重试");
+    $("loginBtn").disabled = false; $("loginBtn").textContent = "进入管理平台";
+  });
+};
+$("tokenInput").addEventListener("keydown", function(e){ if(e.key === "Enter") $("loginBtn").click(); });
+
+/* ---- 拉取记录 ---- */
+function load(){
+  $("list").innerHTML = '<div class="loading">正在拉取回传记录...</div>';
+  fetch("https://api.github.com/repos/" + OWNER + "/" + REPO + "/issues?state=all&per_page=100", {
+    headers: { "Authorization": "Bearer " + token, "Accept": "application/vnd.github+json" }
+  }).then(function(r){
+    if(r.status !== 200) throw new Error("HTTP " + r.status);
+    return r.json();
+  }).then(function(issues){
+    records = [];
+    issues.forEach(function(it){
+      if(it.title.indexOf("【访谈回传】") !== 0) return;
+      var rec = { number: it.number, title: it.title, created_at: it.created_at, state: it.state, sessionId: it.title.replace("【访谈回传】","").trim() };
+      try{
+        var body = JSON.parse(it.body);
+        rec.meta = body.meta || {};
+        rec.summary = body.summary || null;
+        rec.transcript = body.transcript || "";
+      }catch(e){
+        rec.summary = null;
+        rec.transcript = (it.body || "").slice(0, 2000);
+      }
+      records.push(rec);
+    });
+    records.sort(function(a,b){ return b.created_at < a.created_at ? -1 : 1; });
+    render();
+  }).catch(function(e){
+    $("list").innerHTML = '<div class="err">拉取失败（' + esc(String(e)) + '）。请检查 Token 或稍后点"刷新"。</div>';
+  });
+}
+
+/* ---- 渲染 ---- */
+function intentScore(s){
+  if(s && s.purchase_intent && typeof s.purchase_intent.score === "number") return s.purchase_intent.score;
+  return null;
+}
+
+function render(){
+  var kw = ($("searchBox").value || "").trim().toLowerCase();
+  var shown = records.filter(function(r){
+    if(!kw) return true;
+    var hay = JSON.stringify([r.sessionId, r.summary, r.transcript]).toLowerCase();
+    return hay.indexOf(kw) > -1;
+  });
+
+  var total = records.length;
+  var scored = records.filter(function(r){ return intentScore(r.summary) !== null; });
+  var avg = scored.length ? (scored.reduce(function(a,r){ return a + intentScore(r.summary); }, 0) / scored.length).toFixed(1) : "-";
+  var high = scored.filter(function(r){ return intentScore(r.summary) >= 7; }).length;
+  var follow = records.filter(function(r){ return r.summary && r.summary.follow_up_ok; }).length;
+  var week = records.filter(function(r){ return (new Date(r.created_at).getTime() > Date.now() - 7*864e5); }).length;
+
+  $("stats").innerHTML =
+    stat(total, "累计回传", "份", "") +
+    stat(avg, "平均购买意愿", "/10", "green") +
+    stat(high, "高意愿（7 分以上）", "份", "") +
+    stat(follow, "愿意回访", "份", "") +
+    stat(week, "近 7 天新增", "份", "");
+
+  function stat(v, k, unit, cls){
+    return '<div class="stat"><div class="k">' + k + '</div><div class="v ' + cls + '">' + v + '<span style="font-size:12px;font-weight:400;color:var(--cocoa-soft)"> ' + unit + '</span></div></div>';
+  }
+
+  if(!shown.length){
+    $("list").innerHTML = '<div class="empty"><svg class="paw" viewBox="0 0 64 64"><ellipse cx="32" cy="42" rx="13" ry="10" fill="#7C9473"/><circle cx="15" cy="27" r="6.5" fill="#7C9473"/><circle cx="27" cy="18" r="6.5" fill="#7C9473"/><circle cx="40" cy="18" r="6.5" fill="#7C9473"/><circle cx="50" cy="27" r="6.5" fill="#7C9473"/></svg><div>' + (records.length ? "没有匹配「" + esc(kw) + "」的记录" : "还没有回传记录，分享访谈链接收第一份吧") + '</div></div>';
+    return;
+  }
+
+  var html = "";
+  shown.forEach(function(r, idx){
+    var s = r.summary || {};
+    var pains = (s.key_pain_points || []).join("、");
+    var intent = intentScore(s);
+    html +=
+    '<div class="card" data-i="' + records.indexOf(r) + '">' +
+      '<div class="top">' +
+        '<span class="num">' + esc(r.sessionId) + '</span>' +
+        '<span class="badge">' + new Date(r.created_at).toLocaleString("zh-CN", {month:"2-digit", day:"2-digit", hour:"2-digit", minute:"2-digit"}) + '</span>' +
+        (s.follow_up_ok ? '<span class="badge cat">愿回访</span>' : '') +
+        '<span class="score">' + (intent !== null ? "意愿 " + intent + "/10" : "意愿未评") + '</span>' +
+      '</div>' +
+      '<div class="profile">' + esc(s.respondent_profile || "画像待补充") + '</div>' +
+      (pains ? '<div class="pains"><b>痛点：</b>' + esc(pains) + '</div>' : '') +
+      '<div class="detail">' +
+        '<h4>概念反馈</h4>' +
+        '<p>' + esc("第一印象：" + ((s.concept_feedback||{}).first_impression || "-")) + '</p>' +
+        '<ul>' + ((s.concept_feedback||{}).attractions||[]).map(function(x){ return '<li>' + esc(x) + '</li>'; }).join("") + '</ul>' +
+        '<h4>顾虑</h4>' +
+        '<ul>' + ((s.concept_feedback||{}).concerns||[]).map(function(x){ return '<li>' + esc(x) + '</li>'; }).join("") + '</ul>' +
+        '<h4>购买意愿与原因</h4>' +
+        '<p>' + esc(intent !== null ? intent + "/10：" : "") + esc(((s.purchase_intent||{}).reasons||[]).join("；")) + '</p>' +
+        '<h4>价格与渠道</h4>' +
+        '<p>' + esc((s.price_expectation || "-") + "｜" + (s.channels||[]).join("、")) + '</p>' +
+        '<h4>金句原话</h4>' +
+        '<div class="quotes">' + ((s.memorable_quotes||[]).map(function(x){ return "「" + esc(x) + "」"; }).join("<br>") || "-") + '</div>' +
+        (s.researcher_notes ? '<h4>给研究的建议</h4><div class="notes">' + esc(s.researcher_notes) + '</div>' : '') +
+        '<div class="transcript-toggle" onclick="toggleT(event)">展开逐字稿 ▾</div>' +
+        '<div class="transcript">' + esc(r.transcript) + '</div>' +
+      '</div>' +
+    '</div>';
+  });
+  $("list").innerHTML = html;
+
+  Array.prototype.forEach.call(document.querySelectorAll(".card"), function(card){
+    card.addEventListener("click", function(ev){
+      if(ev.target.classList.contains("transcript-toggle") || ev.target.closest(".transcript")) return;
+      card.classList.toggle("open");
+    });
+  });
+}
+
+function toggleT(ev){
+  ev.stopPropagation();
+  var card = ev.target.closest(".card");
+  var t = card.querySelector(".transcript");
+  var show = !t.classList.contains("show");
+  t.classList.toggle("show", show);
+  ev.target.textContent = show ? "收起逐字稿 ▴" : "展开逐字稿 ▾";
+}
+
+$("searchBox").addEventListener("input", render);
+$("refreshBtn").onclick = function(){ toast("刷新中..."); load(); };
+
+/* ---- 导出 ---- */
+$("jsonBtn").onclick = function(){
+  var blob = new Blob([JSON.stringify(records, null, 2)], { type: "application/json" });
+  var url = URL.createObjectURL(blob);
+  var a = document.createElement("a");
+  a.href = url; a.download = "访谈回传记录_全量.json";
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  setTimeout(function(){ URL.revokeObjectURL(url); }, 800);
+  toast("已导出 " + records.length + " 份 JSON");
+};
+
+$("csvBtn").onclick = function(){
+  var rows = [["编号","回传时间","受访者画像","购买意愿(0-10)","价格预期","渠道","痛点","吸引点","顾虑","愿回访","研究建议","金句"]];
+  records.forEach(function(r){
+    var s = r.summary || {};
+    rows.push([
+      r.sessionId,
+      new Date(r.created_at).toLocaleString("zh-CN"),
+      s.respondent_profile || "",
+      intentScore(s) !== null ? intentScore(s) : "",
+      s.price_expectation || "",
+      (s.channels||[]).join(" "),
+      (s.key_pain_points||[]).join(" "),
+      ((s.concept_feedback||{}).attractions||[]).join(" "),
+      ((s.concept_feedback||{}).concerns||[]).join(" "),
+      s.follow_up_ok ? "是" : "否",
+      s.researcher_notes || "",
+      (s.memorable_quotes||[]).join(" ")
+    ]);
+  });
+  var csv = "\uFEFF" + rows.map(function(row){
+    return row.map(function(cell){ return '"' + String(cell).replace(/"/g, '""') + '"'; }).join(",");
+  }).join("\n");
+  var blob = new Blob([csv], { type: "text/csv;charset=utf-8" });
+  var url = URL.createObjectURL(blob);
+  var a = document.createElement("a");
+  a.href = url; a.download = "访谈回传记录.csv";
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  setTimeout(function(){ URL.revokeObjectURL(url); }, 800);
+  toast("已导出 CSV");
+};
+
+/* ---- 自动登录 ---- */
+try{
+  var saved = localStorage.getItem("pet_admin_token");
+  if(saved){ $("tokenInput").value = saved; $("loginBtn").click(); }
+}catch(e){}
+</script>
+</body>
+</html>
