@@ -494,8 +494,8 @@ function requestReply(onDone, onError){
       state.done = true;
       state.finishedAt = new Date().toISOString();
       save();
-      onDone && onDone();
-    } else {
+      requestSummary();
+    } else if(!wasDone){
       onDone && onDone();
     }
   }
@@ -667,7 +667,8 @@ $("startBtn").onclick = function(){
     });
     if(state.conceptShown) renderConceptCard();
     if(state.done){
-      requestSummary();
+      if(state.aiSummary && state.summarized){ buildSummaryOutput(); showSummary(); }
+      else { requestSummary(); }
     }else{
       setBusy(false);
     }
