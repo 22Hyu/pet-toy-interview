@@ -182,11 +182,12 @@ body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
     <p>小鹿已经整理好你们的对话要点。请把访谈记录回传给邀请你的人。</p>
     <div class="summary-box" id="summaryBox"></div>
     <div class="done-actions">
+      <button class="go" id="submitBtn">一键回传给研究团队</button>
       <div class="row2">
         <button class="btn-line" id="copyBtn">复制记录</button>
         <button class="btn-line" id="dlBtn">下载记录文件</button>
       </div>
-      <button class="go" id="againBtn">我再帮朋友填一份</button>
+      <button class="go" id="againBtn" style="background:var(--cream-deep);color:var(--cocoa-soft);box-shadow:none;font-size:13px;letter-spacing:1px">我再帮朋友填一份</button>
     </div>
     <div class="note">记录仅含对话与研究摘要，不含隐私敏感信息</div>
   </div>
@@ -211,6 +212,11 @@ var CONFIG = {
     base: "https://open.bigmodel.cn/api/paas/v4/chat/completions",
     key: "13aab3165e0845bea9b880fcc173e225.UsyLJlRtsg5iPWjI",
     model: "glm-4-flash"
+  },
+  github: {
+    owner: "22Hyu",
+    repo: "pet-toy-interview",
+    tokenB64: ""   // 仅限本仓库 Issues 权限的细粒度令牌（Base64 编码后填入）
   },
   concept: {
     title: "喵汪伴玩 Pro · 智能互动逗宠玩具",
@@ -572,6 +578,53 @@ function buildSummaryOutput(){
     document.body.appendChild(a); a.click(); document.body.removeChild(a);
     setTimeout(function(){ URL.revokeObjectURL(url); }, 800);
   };
+
+  /* 一键回传到研究平台（GitHub Issues 作为存储） */
+  var submitBtn = $("submitBtn");
+  if(!CONFIG.github || !CONFIG.github.tokenB64){
+    submitBtn.textContent = "回传通道未配置，请用复制/下载回传";
+    submitBtn.disabled = true;
+    submitBtn.style.opacity = ".55";
+  }else{
+    submitBtn.onclick = function(){
+      submitBtn.disabled = true;
+      submitBtn.textContent = "正在回传…";
+      var gh = CONFIG.github;
+      var ghToken = "";
+      try { ghToken = atob(gh.tokenB64 || ""); } catch(e){}
+      if(!ghToken){
+        submitBtn.disabled = false;
+        submitBtn.textContent = "回传通道未配置，请用复制/下载回传";
+        return;
+      }
+      var issueBody = JSON.stringify(recordOutput, null, 2);
+      if(issueBody.length > 60000){
+        issueBody = JSON.stringify({ meta: recordOutput.meta, summary: recordOutput.summary, transcript: recordOutput.transcript.slice(0, 55000) + "\n…（过长截断）" }, null, 2);
+      }
+      fetch("https://api.github.com/repos/" + gh.owner + "/" + gh.repo + "/issues", {
+        method: "POST",
+        headers: {
+          "Authorization": "Bearer " + ghToken,
+          "Accept": "application/vnd.github+json",
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          title: "【访谈回传】" + state.sessionId + (state.aiSummary && state.aiSummary.respondent_profile ? " · " + state.aiSummary.respondent_profile : ""),
+          body: issueBody
+        })
+      }).then(function(r){
+        if(r.status === 201) return r.json();
+        return r.text().then(function(t){ throw new Error("HTTP " + r.status); });
+      }).then(function(j){
+        submitBtn.textContent = "已回传成功，谢谢！";
+        submitBtn.style.background = "linear-gradient(135deg,var(--sage),#93AF89)";
+        submitBtn.style.boxShadow = "0 10px 26px rgba(124,148,115,.32)";
+      }).catch(function(e){
+        submitBtn.disabled = false;
+        submitBtn.textContent = "回传失败，点此重试（也可用复制/下载）";
+      });
+    };
+  }
 }
 
 function requestSummary(){
